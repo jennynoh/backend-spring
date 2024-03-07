@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>친구 정보 등록</title>
+</head>
+
+<body>
+    <h2>친구 정보 등록</h2>
+    <!-- 서버에 요청보내는 거여서 th:action으로 보내야함 -->
+    <form th:action="@{/insert}" method="POST">
+        <label for="fname">
+            이름: <input type="text" name="fname" id="fname" placeholder="이름을 입력해주세요.">
+        </label><br>
+        <label for="age">
+            나이: <input type="number" name="age" id="age" placeholder="나이를 입력해주세요.">
+        </label><br>
+        <label for="phone">
+            전화번호: <input type="text" name="phone" id="phone" placeholder="전화번호를 입력해주세요.">
+        </label><br>
+        <label for="birthday">
+            생년월일: <input type="date" name="birthday" id="birthday">
+        </label><br>
+        <label for="active">
+            성향:
+            <input type="radio" name="active" value="1" checked>외향적
+            <input type="radio" name="active" value="0">내향적
+        </label><br><br>
+        <div>
+            <input type="submit" value="저장">
+            <input type="reset" value="취소">
+        </div>
+    </form>
+</body>
+
+</html>

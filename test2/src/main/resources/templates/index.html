@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>첫 번째 요청</title>
+</head>
+<body>
+    <h2>첫 번째 요청에 대한 응답</h2>
+    <h3>(1) 응답에서 전달받은 값 꺼내는 법 - 1</h3>
+    <p>
+        이름: [[ ${name} ]] <br>
+        나이: [[ ${age} ]] <br>
+        가입일: [[ ${join_date} ]]
+    </p>
+    <hr>
+    <h3>(2) 응답에서 전달받은 값 꺼내는 법 - 2</h3>
+    <p>태그를 이용해서 응답을 꺼내는 법: 어떤 태그든 상관 없음</p>
+    <p>
+        이름: <span th:text="${name}">아무개씨</span> <br>
+        나이: <span th:text="${age}">100살</span> <br>
+        가입일: <span th:text="${join_date}">100년전</span>
+    </p>
+    <hr>
+    <h3>(3) 데이터를 서버로 전달 - a태그</h3>
+    <a href="input?name=James&age=35">이름과 나이 전달하기</a>
+</body>
+</html>

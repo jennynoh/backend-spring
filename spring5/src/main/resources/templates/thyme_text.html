@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thymeleaf text 출력</title>
+    <style>
+        img {
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Thymeleaf text 출력</h2>
+    <div>
+        <!-- thymeleaf에서 context path를 달고 다니도록 명령 -->
+        <!-- @: hyperlink, 외부파일과 연동 (이미지, css, javascript) -->
+        <a th:href="@{/}"><img th:src="@{/images/home.png}" alt="logo"></a>
+    </div>
+
+    <h3>1. 태그에 Thymeleaf로 문자출력</h3>
+    <p>한글: <span th:text="${korean}">한글</span></p>
+    <p>영어: <span th:text="${english}">영어</span></p>
+    <p>나이: <span th:text="${age}">정수</span></p>
+    <p>파이: <span th:text="${pi}">실수</span></p>
+    <p>태그: <span th:text="${tag}">태그</span></p>
+    <p>url: <span th:text="${url}">url</span></p>
+    <br> <!-- 태그와 url에 기능 넣기 -->
+    <p>태그: <span th:utext="${tag}">태그</span></p>
+    <p>url: <a href="http://www.naver.com" th:href="${url}" th:text="${url}">네이버</a></p>
+    <!-- th:text: 가져온 텍스트로 덮어씌우기, th:text 없이 th:href만 있으면 '네이버' 텍스트만 노출되고 링크 걸림 -->
+    <!-- href에 걸린 링크는 th:href의 링크로 덮어씌워짐 -->
+
+    <hr>
+    <h3>2. 태그 안쪽에 Thymeleaf 문법사용</h3>
+    <p>한글: [[ ${korean} ]]</p>
+    <p>한글: ${korean}</p>
+    
+    <hr>
+    <h3>3. 객체데이터 (FriendDTO) 꺼내기</h3>
+    <p>전체 데이터: [[${f1}]] </p> <!-- f1.toString() -->
+    <p>이름: [[${f1.fname}]] </p>
+    <p>전화번호: [[${f1.phone}]] </p>
+    <p>나이: [[${f1.age}]] </p>
+    <p>생년월일: [[${f1.birthday}]] </p>
+    <p>셩향: [[${f1.active}]] </p> 
+
+    <hr>
+    <h3>4. 초기화된 객체데이터(FriendDTO) 꺼내기</h3>
+    <p>전체데이터: <span th:text="${f2}"></span></p>
+    <p>이름: <span th:text="${f2.fname}"></span></p>
+    <p>전화번호: <span th:text="${f2.phone}"></span></p>
+    <p>나이: <span th:text="${f2.age}"></span></p>
+    <p>생년월일: <span th:text="${f2.birthday}"></span></p>
+    <p>성향: <span th:text="${f2.active}"></span></p>
+
+    <hr>
+    <h3>5. 초기화된 객체데이터(FriendDTO) 꺼내기 - 2</h3>
+    <!-- 객체: th:object -->
+    <p th:object="${f3}">
+        이름: <span th:text="*{fname}"></span><br>
+        나이: <span th:text="*{age}"></span><br>
+        전화번호: <span th:text="*{phone}"></span><br>
+        생년월일: <span th:text="*{birthday}"></span><br>
+        성향: <span th:text="*{active}"></span>
+    </p>
+
+    <hr>
+    <h3>6. 숫자 데이터 출력 (일반)</h3>
+    <p>
+        정수: <span th:text="${n1}">정수</span><br>
+        실수: <span th:text="${n2}">실수</span><br>
+        실수: <span th:text="${n3}">실수</span>
+    </p>
+
+    <hr>
+    <h3>7. 숫자 데이터 출력 (포맷팅)</h3>
+    <p>
+        <!-- #numbers.formatInteger(변수명,자릿수) -->
+        정수(n1): <span th:text="${#numbers.formatInteger(n1, 10)}">정수</span><br>
+        <!-- #numbers.formatInteger(변수명, 자릿수마다, 기호) -->
+        정수(n1): <span th:text="${#numbers.formatInteger(n1, 3, 'COMMA')}">실수</span><br>
+        <!-- #numbers.formatDecimal(변수명, 자릿수마다, 기호, 소수점아래 자릿수, 소수점) : 반올림한다-->
+        실수(n2): <span th:text="${#numbers.formatDecimal(n2, 3, 'COMMA', 3, 'POINT')}">실수</span><br>
+        <!-- 정수자리 부족하면 0으로 채워넣음: 056.3457 -->
+        실수(n3): <span th:text="${#numbers.formatDecimal(n3, 3, 'COMMA', 4, 'POINT')}">실수</span><br>
+
+        <!-- POINT는 앞에 COMMA와 함께 써야한다. -->
+        <!-- 실수(n3): <span th:text="${#numbers.formatDecimal(n3, 4, 'POINT')}">실수</span> -->
+
+        <!-- #numbers.formatPercent(변수명, 상위자리(0이면 그냥출력), 하위자리 ) -->
+        <!-- 상위자리: 유효자리만 남겨둠 -->
+        백분율(n4): <span th:text="${#numbers.formatPercent(n4, 0, 5)}"></span><br>
+        백분율(n4): <span th:text="${#numbers.formatPercent(n4, 2, 2)}"></span><br>
+
+        백분율(n5): <span th:text="${#numbers.formatPercent(n5, 0, 0)}"></span><br> <!-- 5% -->
+        백분율(n5): <span th:text="${#numbers.formatPercent(n5, 2, 5)}"></span><br> <!-- 05.00000% -->
+    </p>
+
+    <hr>
+    <h3>8. 날짜 객체 출력 (일반)</h3>
+    <p>
+        Date: <span th:text="${date}"></span><br>
+        Calendar: <span th:text="${calendar}"></span><br>
+        LocalDate: <span th:text="${localDate}"></span><br>
+        LocalDateTime: <span th:text="${localTime}"></span><br>
+    </p>
+
+    <hr>
+    <h3>9. 날짜 객체 출력 (포맷팅)</h3>
+    <p>
+        <!-- #dates.format(변수명, '날짜 format') -->
+        <!-- 날짜 포맷: 'yyyy년 MM월 dd일', 'yyyy-MM-dd', 'dd/MM/yyyy' -->
+        Date: <span th:text="${#dates.format(date, 'yyyy년 MM월 dd일 HH시 mm분')}"></span><br>
+        <!-- #calendars.format(변수명, '날짜 format') -->
+        Calendar: <span th:text="${#calendars.format(calendar, 'yyyy/MM/dd HH:mm')}"></span><br>
+        <!-- #temporals.format(변수명, '날짜 format') -->
+        <!-- localDate에는 시간이 없어서: 2024-03-06 00:00로 출력됨 -->
+        LocalDate: <span th:text="${#temporals.format(localDate, 'yyyy-MM-dd hh:mm:ss a')}"></span><br>
+        LocalDateTime: <span th:text="${#temporals.format(localTime, 'yyyy-MM-dd hh:mm:ss a')}"></span><br>
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thymeleaf 연산자</title>
+</head>
+
+<body>
+    <h2>Thymeleaf 연산자</h2>
+    <div>
+        <a th:href="@{/}"><img th:src="@{/images/home.png}" alt="logo" width="50px"></a>
+    </div>
+
+    <h3>18. 산술연산자 (+, -, *, /, %)</h3>
+    <ul>
+        <li>값: [[${intNum}]]</li>
+        <li>값+10: [[${intNum} + 10]] </li>
+        <li>값+10: <span th:text="${intNum}+10">결과 32</span></li>
+        <li>값-10: <span th:text="${intNum}-10">결과 12</span></li>
+        <li>값*3: <span th:text="${intNum}*3">결과 66</span></li>
+        <li>값/3: <span th:text="${intNum}/3">결과 7.3333333333</span></li>
+        <li>값%3: <span th:text="${intNum}%3">결과 1</span></li>
+        <li>--------------------------------</li>
+        <li>값: [[${dbNum}]]</li>
+        <!-- 2진수로 변환하여 연산하기 때문에 값이...나누어떨어지지 않음 -->
+        <li>값/10: <span th:text="${dbNum}/10"></span></li>
+        <li>값%3: <span th:text="${dbNum}%3"></span></li>
+    </ul>
+
+    <h3>19. 문자열 결합 연산자 (+, |)</h3>
+    <ul>
+        <li>+ 기호 결합: <span th:text="'Hello, '+${name}+' nice to meet you!'"></span></li>
+        <li>| 기호 결합: <span th:text="|Hello, ${name} nice to meet you!|"></span></li>
+        <li>+, | 기호 결합: <span th:text="${one}+', '+|${two}, ${three}, 너구리, 오징어|"></span></li>
+    </ul>
+
+    <h3>20. 비교연산자</h3>
+    <ul>
+        <li>값: [[${intNum}]]</li>
+        <li>== (eq): ${intNum}%2 eq 0 => <span th:text="${intNum}%2 eq 0"></span></li>
+        <li>!= (ne): ${intNum}%2 gt 0 => <span th:text="${intNum}%2 ne 0"></span></li>
+        <li>> (gt): ${intNum}%2 gt 0 => <span th:text="${intNum}%2 gt 0"></span></li>
+        <li>>= (ge): ${intNum}%2 ge 0 => <span th:text="${intNum}%2 ge 0"></span></li>
+        <li>&lt; (lt): ${intNum}%2 lt 0 => <span th:text="${intNum}%2 lt 0"></span></li>
+        <li>&lt;= (le): ${intNum}%2 le 0 => <span th:text="${intNum}%2 le 0"></span></li>
+    </ul>
+
+    <h3>21. 논리연산자 (and, or, not)</h3>
+    <ul>
+        <li>and: (${intNum}&gt;10) and (${intNum}&lt;30) => </30> <span
+                th:text="(${intNum}>10) and (${intNum}<30)"></span></li>
+        <li>or: (${intNum}$gt;10) or (${intNum}&lt;30) => <span th:text="(${intNum}>10) or (${intNum}<30)"></span></li>
+        <li>not: not(${intNum}%2) => <span th:text="not(${intNum}%2)"></span></li>
+    </ul>
+
+    <h3>22. 조건연산자 (?:)</h3>
+    <p>
+        [[${intNum}]]은/는 <span th:text="${intNum}%2 ? '홀수' : '짝수'"></span> <br>
+        <span th:text="${intNum}%2==0 ? |${intNum}은/는 짝수| : |${intNum}은/는 홀수|"></span> <br>
+        <span th:text="23%2==0?|23은 짝수|:|23은 홀수|"></span>
+    </p>
+
+    <h3>23. FriendDTO 객체 작업</h3>
+    <ul th:object="${friend}">
+        <li>이름: <span th:text="*{fname}"></span></li>
+        <li>나이: <span th:text="*{age}"></span></li>
+        <li>전화번호: <span th:text="*{phone}"></span></li>
+        <li>생년월일: <span th:text="*{birthday}"></span></li>
+        <li>성향: <span th:text="*{active}?'외향적':'내향적'"></span></li>
+    </ul>
+
+</body>
+
+</html>

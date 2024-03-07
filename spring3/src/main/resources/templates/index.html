@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다양한 Parameter 처리</title>
+</head>
+<body>
+    <h2>다양한 Parameter 처리</h2>
+    <ul>
+        <li><a href="param/send?name=James&age=28">Parameter 전달 (Get)</a></li>
+        <li><a href="param/send">Parameter없이 요청 (Get)</a></li>
+    </ul>
+    <hr>
+    <h3>form을 이용한 데이터 전송</h3>
+    <!-- action: 서버쪽에서 받는 프로그램명 -->
+    <form action="/param/sendForm" method="get">
+        <label for="name">이름</label>
+        <!-- 서버에서 받는 변수명: name 필수 -->
+        <input type="text" name="name" id="name" placeholder="이름을 입력하세요">
+
+        <label for="age">나이</label>
+        <input type="number" name="age" id="age" placeholder="나이를 입력하세요">
+
+        <input type="submit" value="전송">
+        <input type="reset" value="취소">
+    </form>
+</body>
+</html>

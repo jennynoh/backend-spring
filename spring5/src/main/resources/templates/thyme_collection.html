@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection 데이터의 처리</title>
+    <style>
+        span {
+            color: blue;
+        }
+
+        table {
+            border: 2px;
+            border-collapse: collapse;
+        }
+
+        .mystyle {
+            color: red;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Collection 데이터의 처리</h2>
+    <div>
+        <a th:href="@{/}"><img th:src="@{/images/home.png}" alt="logo" width="50px"></a>
+    </div>
+
+    <h3>11. List의 데이터 처리</h3>
+    <p>
+        List: <span th:text="${list}"></span> <br>
+        <br>
+    <ul>
+        <li>ArrayList size - #lists.size(list): <span th:text="${#lists.size(list)}"></span></li>
+        <li>ArrayList size - list.size(): <span th:text="${list.size()}"></span></li>
+        <li>isEmpty - list.isEmpty(): <span th:text="${list.isEmpty()}"></span></li>
+        <li>isEmpty - #arrays.isEmpty(list): <span th:text="${#arrays.isEmpty(list)}"></span></li>
+        <li>List를 문자열로 join - #strings.arrayJoin(list, ','): <span th:text="${#strings.arrayJoin(list, ',')}"></span>
+        </li>
+        <li>문자열을 List로 split - #strings.listSplit(lunch, ','): <span th:text="${#strings.listSplit(lunch, ',')}"></span>
+        </li>
+        <li>데이터 포함 여부 - #lists.contains(list, '사과'): <span th:text="${#lists.contains(list, '사과')}"></span></li>
+    </ul>
+    </p>
+    <hr>
+    <h3>12. Map 데이터 처리</h3>
+    <p>
+        Map: <span th:text="${map}"></span> <br>
+        <br>
+    <ul>
+        <li>HashMap containsKey: <span th:text="${map.containsKey('son')}"></span></li>
+        <li>HashMap isEmpty: <span th:text="${map.isEmpty()}"></span></li>
+        <li>HashMap size: <span th:text="${#maps.size(map)}"></span></li>
+        <li>HashMap size: <span th:text="${map.size()}"></span></li>
+    </ul>
+    </p>
+    <hr>
+    <h3>13. 반복문의 사용 (일반문자열, th:each)</h3>
+    <ul>
+        <li th:each="str:${list}">
+            <span th:text="${str}"></span>
+        </li>
+    </ul>
+    <hr>
+
+    <h3>14. 반복문의 사용 (ArrayList)</h3>
+    <table>
+        <tr>
+            <th>이름</th>
+            <th>나이</th>
+            <th>전화번호</th>
+            <th>생년월일</th>
+            <th>성향</th>
+        </tr>
+        <tr th:each="friend:${friendList}">
+            <td th:text="${friend.fname}">이름</td>
+            <td th:text="${friend.age}">나이</td>
+            <td th:text="${friend.phone}">전화번호</td>
+            <td th:text="${friend.birthday}">생년월일</td>
+            <td th:text="${friend.active}?'활동적':'정적'">성향</td>
+        </tr>
+    </table>
+
+    <hr>
+    <h3>15. 반복문의 사용 (Map)</h3>
+    <p>저장된 친구 수: [[${#maps.size(map)}]] or [[${map.size()}]] </p>
+    <table>
+        <tr>
+            <th>상태정보</th>
+            <th>key</th>
+            <th>이름</th>
+            <th>나이</th>
+            <th>전화번호</th>
+            <th>생년월일</th>
+            <th>성향</th>
+        </tr>
+        <!-- status: 상태변수 객체, getCount로 얻어올 수 있음 -->
+        <!-- status.count (1,2,3), status.index (0,1,2) -->
+        <tr th:each="friend, status:${map}">
+            <td th:text="${status.count}">상태</td>
+            <td th:text="${friend.key}">key</td>
+            <td th:text="${friend.value.fname}">이름</td>
+            <td th:text="${friend.value.age}">나이</td>
+            <td th:text="${friend.value.phone}">전화번호</td>
+            <td th:text="${friend.value.birthday}">생년월일</td>
+            <td th:text="${friend.value.active}?'활동적':'정적'">성향</td>
+        </tr>
+    </table>
+
+    <hr>
+    <h3>16. 반복문과 상태값</h3>
+    <ul>
+        <li th:each="num,status:${numList}">
+            <span>index: [[${status.index}]], count: [[${status.count}]]</span>
+            <!-- index가 5의 배수일 경우에만 num으로 대치 -->
+            <span th:if="${status.index%5==0}" th:text="${num}" th:class="'mystyle'"></span>
+            <span th:unless="${status.index%5==0}">-------------</span>
+        </li>
+    </ul>
+
+</body>
+
+</html>
