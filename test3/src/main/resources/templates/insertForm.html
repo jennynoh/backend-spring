@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방명록 작성하기</title>
+</head>
+
+<body>
+    <div>
+        <a th:href="@{/}">Home</a> > 방명록 작성하기
+    </div>
+    <h2>방명록 작성하기</h2>
+    <form th:action="@{/insert}" method="POST">
+        <label for="text">방명록: </label><br>
+        <input type="text" id="guestname" name="guestname" placeholder="이름">
+        <input type="password" id="pwd" name="pwd" placeholder="비밀번호"> <br>
+        <textarea name="text" id="text" cols="50" rows="10"></textarea>
+        <br>
+        <input type="submit" value="저장">
+        <input type="reset" value="취소">
+    </form>
+
+</body>
+
+</html>

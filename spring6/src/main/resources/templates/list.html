@@ -9,28 +9,80 @@
 </head>
 
 <body>
+    <div>
+        <a th:href="@{/}">Home</a> > 친구 목록 조회
+    </div>
     <h2>친구 목록 조회</h2>
     <p th:if="${#lists.isEmpty(list)}">친구 목록이 없습니다.</p>
     <div th:unless="${#lists.isEmpty(list)}">
         <table border="1">
             <tr>
-                <td>Seq</td>
+                <td>번호</td>
                 <td>이름</td>
                 <td>나이</td>
                 <td>전화번호</td>
                 <td>생년월일</td>
                 <td>성향</td>
+                <td></td>
             </tr>
-            <tr th:each="friend:${list}">
-                <td th:text="${friend.friendSeq}">sequence</td>
+            <tr th:each="friend, status:${list}">
+                <!-- <td th:text="${friend.friendSeq}">번호</td> -->
+                <td th:text="${status.count}">번호</td>
                 <td th:text="${friend.fname}">이름</td>
                 <td th:text="${friend.age}">나이</td>
                 <td th:text="${friend.phone}">전화번호</td>
                 <td th:text="${friend.birthday}">생년월일</td>
                 <td th:text="${friend.active}?'외향적':'내향적'">성향</td>
+                <td>
+                    <!-- 몇번째 행에서 버튼이 눌린지 알기 위해서 사용자 정의 속성 추가 -->
+                    <input type="button" class="deleteOne" th:data_no="${friend.friendSeq}" value="삭제">
+                    <input type="button" class="updateOne" th:data_no="${friend.friendSeq}" value="수정">
+                </td>
             </tr>
         </table>
     </div>
+
+    <!-- 수정 & 삭제할 form, js에서 컨트롤 -->
+    <form id="sendOne" th:action="@{/deleteOne}" method="GET">
+        <!-- 삭제/수정할 항목을 사용자에게 보여주지 않는다 -->
+        <input type="hidden" id="friendSeq" name="friendSeq" value="">
+    </form>
+
+    <!-- th:inline="javascript" -->
+    <script th:inline="javascript">
+        let delBtns = document.getElementsByClassName("deleteOne");
+        for (let i = 0; i < delBtns.length; ++i) {
+            delBtns[i].addEventListener('click', delFriend);
+        }
+
+        let updateBtns = document.getElementsByClassName("updateOne");
+        for (let i = 0; i < updateBtns.length; ++i) {
+            updateBtns[i].addEventListener('click', updateFriend);
+        }
+
+        //
+        // function(String action){
+
+        // }
+        // delFriend(): 친구정보 삭제
+        function delFriend() {
+            // th:data_no 안하는 이유는: html 파일로 만들어지면서 th 접두사는 사라짐 
+            let data_no = this.getAttribute("data_no");
+            document.getElementById('friendSeq').setAttribute("value", data_no); // input tag에 값 넣기
+            document.getElementById("sendOne").action = 'deleteOne';
+            document.getElementById("sendOne").submit();  // form tag로 서버에 전송 
+            console.log('친구 삭제' + data_no);
+        }
+
+        // updateFriend(): 친구정보 수정
+        function updateFriend() {
+            let data_no = this.getAttribute("data_no");
+            document.getElementById('friendSeq').setAttribute("value", data_no); // input tag에 값 넣기
+            document.getElementById("sendOne").action = 'updateOne';
+            document.getElementById("sendOne").submit();  // form tag로 서버에 전송 
+            console.log('친구 삭제' + data_no);
+        }
+    </script>
 
 </body>
 

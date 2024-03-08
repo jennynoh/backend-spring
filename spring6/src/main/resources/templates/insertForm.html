@@ -8,6 +8,9 @@
 </head>
 
 <body>
+    <div>
+        <a th:href="@{/}">Home</a> > 친구 정보 등록
+    </div>
     <h2>친구 정보 등록</h2>
     <!-- 서버에 요청보내는 거여서 th:action으로 보내야함 -->
     <form th:action="@{/insert}" method="POST">

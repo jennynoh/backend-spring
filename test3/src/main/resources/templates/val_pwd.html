@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방명록 관리</title>
+</head>
+
+<body>
+    <form id="sendPwd" th:action="@{/getMine}" method="GET">
+        <input type="hidden" id="userInput" name="userInput" value="">
+    </form>
+
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', getPwd);
+        function getPwd() {
+            let userInput = prompt("비밀번호를 입력하세요.");
+            document.getElementById('userInput').value = userInput;
+            document.getElementById('sendPwd').submit();
+        }
+    </script>
+</body>
+
+</html>

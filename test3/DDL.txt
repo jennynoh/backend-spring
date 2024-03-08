@@ -1,0 +1,10 @@
+CREATE TABLE guestbook
+(
+    guest_seq NUMBER PRIMARY KEY,
+    guest_name VARCHAR(50) NOT NULL,
+    guest_pwd VARCHAR(20) NOT NULL,
+    guest_text VARCHAR(2000),
+    regdate DATE DEFAULT SYSDATE
+);
+
+CREATE SEQUENCE guestbook_seq;

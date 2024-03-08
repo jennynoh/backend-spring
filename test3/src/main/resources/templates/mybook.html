@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방명록 관리</title>
+    <style>
+        span {
+            font-size: small;
+            color: gray;
+        }
+
+        div.container {
+            border: 1px solid;
+            border-color: gray;
+            border-radius: 5px;
+            width: 500px;
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <a th:href="@{/}">Home</a> > 내 방명록 관리
+    </div>
+    <h2>내 방명록 관리</h2>
+
+    <p th:if="${#lists.isEmpty(list)}">작성한 방명록이 없습니다.</p>
+    <div th:unless="${#lists.isEmpty(list)}">
+        <div class="container" th:each="guestbook, status:${list}">
+            <span th:text="|이름: ${guestbook.guestname}|">이름</span>&nbsp;&nbsp;&nbsp;<span
+                th:text="|작성일: ${#temporals.format(guestbook.regdate, 'YYYY-MM-dd HH:mm:ss')}|">작성일</span>
+            <br>
+            <p th:text="${guestbook.text}">방명록 내용</p>
+            <div>
+                <input type="button" class="deleteOne" th:data_no="${guestbook.guestSeq}" value="삭제">
+                <input type="button" class="updateOne" th:data_no="${guestbook.guestSeq}" value="수정" disabled>
+            </div>
+        </div>
+    </div>
+
+    <form id="sendOne" th:action="@{/deleteOne}" method="GET">
+        <input type="hidden" id="guestSeq" name="guestSeq" value="">
+    </form>
+
+    <script th:inline="javascript">
+        let delBtns = document.getElementsByClassName('deleteOne');
+        for (let i = 0; i < delBtns.length; ++i) {
+            delBtns[i].addEventListener('click', delBook);
+        }
+
+        function delBook() {
+            let data_no = this.getAttribute("data_no");
+            document.getElementById('guestSeq').value = data_no;
+            document.getElementById('sendOne').submit();
+        }
+
+
+    </script>
+</body>
+
+</html>

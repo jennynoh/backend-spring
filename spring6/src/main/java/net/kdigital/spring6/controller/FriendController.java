@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 import net.kdigital.spring6.dto.FriendDTO;
@@ -52,5 +53,37 @@ public class FriendController {
 		
 		return "list";
 	}
+	
+	@GetMapping("/deleteOne")
+	public String deleteOne(
+			@RequestParam(name="friendSeq", defaultValue="0") Long friendSeq
+			) {
+		log.info("삭제할 객체 seq: {}", friendSeq);
+		service.deleteOne(friendSeq);
+		return "redirect:/list"; // 친구정보 조회 페이지로 redirect
+	}
+	
+	@GetMapping("/updateOne")
+	public String updateOne(
+			@RequestParam(name="friendSeq", defaultValue="0") Long friendSeq,
+			Model model) {
+		
+		FriendDTO friendDTO = service.selectOne(friendSeq);
+		log.info("수정할 data: {}", friendDTO.toString());
+		
+		model.addAttribute("friend", friendDTO);
+		return "updateForm";
+	}
+	
+	@PostMapping("/updateProc")
+	public String updateProc(
+			@ModelAttribute FriendDTO friendDTO) {
+		log.info("수정된 정보: {}", friendDTO.toString());
+		
+		service.updateProc(friendDTO);
+		
+		return "redirect:/list";
+	}
+	
 
 }

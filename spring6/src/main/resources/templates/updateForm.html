@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>친구 정보 수정</title>
+</head>
+
+<body>
+    <div>
+        <a th:href="@{/}">Home</a> > 친구 목록 > 친구 정보 수정
+    </div>
+    <h2>친구 정보 수정</h2>
+    <!-- 서버에 요청보내는 거여서 th:action으로 보내야함 -->
+    <form th:action="@{/updateProc}" method="POST">
+        <input type="hidden" name="friendSeq" th:value="${friend.friendSeq}">
+        <label for="fname">
+            이름: <input type="text" name="fname" id="fname" th:value="${friend.fname}">
+        </label><br>
+        <label for="age">
+            나이: <input type="number" name="age" id="age" th:value="${friend.age}">
+        </label><br>
+        <label for="phone">
+            전화번호: <input type="text" name="phone" id="phone" th:value="${friend.phone}">
+        </label><br>
+        <label for="birthday">
+            생년월일: <input type="date" name="birthday" id="birthday" th:value="${friend.birthday}">
+        </label><br>
+        <label for="active">
+            성향:
+            <input type="radio" name="active" value="1" th:field="${friend.active}" th:value="true">외향적
+            <input type="radio" name="active" value="0" th:field="${friend.active}" th:value="false">내향적
+        </label><br><br>
+        <div>
+            <input type="submit" value="저장">
+            <input type="reset" value="취소">
+        </div>
+    </form>
+</body>
+
+</html>

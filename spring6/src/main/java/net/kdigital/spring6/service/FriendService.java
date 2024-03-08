@@ -2,6 +2,7 @@ package net.kdigital.spring6.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -46,5 +47,30 @@ public class FriendService {
 		
 		return friendDTOList;
 	}
+
+
+	public void deleteOne(Long friendSeq) {
+		friendRepository.deleteById(friendSeq);
+	}
+
+
+	@SuppressWarnings("static-access")
+	public FriendDTO selectOne(Long friendSeq) {
+		// optional 객체: 객체가 없을 수 있어 Null pointer exception 관리하는 객
+		Optional<FriendEntity> entity = friendRepository.findById(friendSeq); 
+		if(entity.isPresent()) {
+			FriendEntity friendEntity = entity.get();
+			return FriendEntity.toDTO(friendEntity);
+		} 
+		return null;
+	}
+
+
+	public void updateProc(FriendDTO friendDTO) {
+		FriendEntity entity = FriendDTO.toEntity(friendDTO);
+		friendRepository.updateFriend(entity);
+	}
+
+
 	
 }
