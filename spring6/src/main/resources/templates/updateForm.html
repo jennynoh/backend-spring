@@ -31,6 +31,10 @@
             성향:
             <input type="radio" name="active" value="1" th:field="${friend.active}" th:value="true">외향적
             <input type="radio" name="active" value="0" th:field="${friend.active}" th:value="false">내향적
+            <!-- 
+            <input type="radio" name="active" value="1" th:checked="${friend.active}">외향적
+            <input type="radio" name="active" value="0" th:checked="not ${friend.active}">내향적
+             -->
         </label><br><br>
         <div>
             <input type="submit" value="저장">

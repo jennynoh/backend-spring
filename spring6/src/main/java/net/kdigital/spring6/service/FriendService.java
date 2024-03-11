@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +42,9 @@ public class FriendService {
 
 	// repository에서 데이터 받아오기 
 	public List<FriendDTO> selectAll() {
-		List<FriendEntity> list = friendRepository.findAll();
+		// 정렬되지 않은 상태로 받아오기 => List<FriendEntity> list = friendRepository.findAll();
+		// 이름 순 정렬 
+		List<FriendEntity> list = friendRepository.findAll(Sort.by(Sort.Direction.ASC, "fname"));
 		List<FriendDTO> friendDTOList = new ArrayList<>();
 		list.forEach((entity) -> friendDTOList.add(FriendEntity.toDTO(entity)));
 		
