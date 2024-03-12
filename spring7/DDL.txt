@@ -1,0 +1,13 @@
+1. 게시판 테이블 
+
+CREATE TABLE board
+(
+    board_num NUMBER constraint board_num_pk PRIMARY KEY
+    , board_writer VARCHAR2(20) constraint board_writer_nn NOT NULL
+    , board_title VARCHAR2(200) default '제목없음'
+    , board_content VARCHAR2(4000)
+    , hit_count NUMBER default 0
+    , like_count NUMBER default 0
+    , create_date DATE default SYSDATE
+    , update_date DATE
+);
