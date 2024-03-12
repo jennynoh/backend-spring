@@ -24,13 +24,14 @@ public class FriendService {
 
 
 	// 친구정보 db에 전송 
+	@SuppressWarnings("null")
 	public void insertFriend(FriendDTO friendDTO) {
-		log.info("service에 도착!");
+		log.info("service에 도착! {}", friendDTO.toString());
 		
 		// 1) 전달받은 DTO를 Entity로 변환
 		// DTO -> Entity
 		FriendEntity entity = FriendDTO.toEntity(friendDTO);
-		
+		log.info("service에 도착! {}", entity.toString());
 		// Entity -> DTO
 		// FriendDTO dto = FriendEntity.toDTO(entity);
 		
@@ -69,9 +70,28 @@ public class FriendService {
 	}
 
 
+	// @Transactional
 	public void updateProc(FriendDTO friendDTO) {
-		FriendEntity entity = FriendDTO.toEntity(friendDTO);
-		friendRepository.updateFriend(entity);
+		// 1) find한 데이터의 값을 set으로 변경 => update
+		Optional<FriendEntity> entity = friendRepository.findById(friendDTO.getFriendSeq());
+		
+		if(entity.isPresent()) {
+			FriendEntity f = entity.get();
+			f.setFname(friendDTO.getFname());
+			f.setAge(friendDTO.getAge());
+			f.setPhone(friendDTO.getPhone());
+			f.setBirthday(friendDTO.getBirthday());
+			f.setActive(friendDTO.isActive());
+			
+			friendRepository.deleteById(friendDTO.getFriendSeq());
+			friendRepository.save(f);
+		}
+		
+//		// 2) JPQL
+//		 FriendEntity entity = FriendDTO.toEntity(friendDTO);
+//		 friendRepository.updateFriend(entity);
+		
+		
 	}
 
 

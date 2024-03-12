@@ -1,6 +1,7 @@
 package net.kdigital.test3.entity;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,6 +43,9 @@ public class GuestbookEntity {
 	@Column(name="regdate")
 	private LocalDateTime regdate;
 	
+	@Column(name="update_date")
+	private LocalDateTime updateDate;
+	
 	// Entity -> DTO 메서드
 	public static GuestbookDTO toDTO(GuestbookEntity guestbookEntity) {
 		return GuestbookDTO.builder()
@@ -50,7 +54,10 @@ public class GuestbookEntity {
 				.pwd(guestbookEntity.getPwd())
 				.text(guestbookEntity.getText())
 				.regdate(guestbookEntity.getRegdate())
+				.updateDate(guestbookEntity.getUpdateDate())
 				.build();
 	}
+
+	
 
 }

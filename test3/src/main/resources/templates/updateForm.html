@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방명록 수정</title>
+    <style>
+        span {
+            font-size: small;
+            color: gray;
+        }
+
+        div.container {
+            border: 1px solid;
+            border-color: gray;
+            border-radius: 5px;
+            width: 500px;
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <a th:href="@{/}">Home</a> > 내 방명록 관리 > 방명록 수정
+    </div>
+    <h2>내 방명록 관리</h2>
+
+    <form th:action="@{/updateOne}" method="POST">
+        <div class="container">
+            <span th:text="|이름: ${updateTarget.guestname}|">이름</span>&nbsp;&nbsp;&nbsp;<span
+                th:text="|작성일: ${#temporals.format(updateTarget.regdate, 'YYYY-MM-dd HH:mm:ss')}|">작성일</span>
+            <br>
+            <textarea name="updatedText" id="updatedText" cols="50" rows="10"
+                th:placeholder="${updateTarget.text}"></textarea>
+            <input type="hidden" name="guestSeq" th:value="${updateTarget.guestSeq}">
+            <br>
+            <div>
+                <input type="submit" value="완료">
+                <input type="reset" value="취소">
+            </div>
+        </div>
+    </form>
+
+</body>
+
+</html>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.kdigital.spring6.dto.FriendDTO;
@@ -17,21 +18,21 @@ import net.kdigital.spring6.service.FriendService;
 
 @Controller
 @Slf4j
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class FriendController {
 	
 	// service내의 값을 변경하지 않기 때문에 finla로 지정할 수 있음
 	// final은 생성과 동시에 초기화 해야하지만 service는 new로 생성할 수 없음 
 	// => @RequiredArgsContructor: final이 붙은 멤버를 생성할 때 사용 
 	
-	private final FriendService service;
+	private FriendService service;
 	
 	//생성자 주입방식 - service 객체 생성
 	// before: @Autowired
 	// new FriendService()하지 않고 spring이 생성해서 전달해줌 
-//	public FriendController(FriendService service) {
-//		this.service = service;
-//	}
+	public FriendController(FriendService service) {
+		this.service = service;
+	}
 	
 	
 	

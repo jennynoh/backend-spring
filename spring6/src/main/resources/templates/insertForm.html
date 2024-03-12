@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>친구 정보 등록</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -13,18 +18,27 @@
     </div>
     <h2>친구 정보 등록</h2>
     <!-- 서버에 요청보내는 거여서 th:action으로 보내야함 -->
-    <form th:action="@{/insert}" method="POST">
+    <form th:action="@{/insert}" method="POST" th:object="${friendDTO}">
         <label for="fname">
-            이름: <input type="text" name="fname" id="fname" placeholder="이름을 입력해주세요.">
+            이름:
+            <input type="text" name="fname" id="fname" placeholder="이름을 입력해주세요." th:field="*{fname}">
+            <!-- 오류메세지 출력 구역 -->
+            <span class="error" th:errors="*{fname}"></span>
         </label><br>
         <label for="age">
-            나이: <input type="number" name="age" id="age" placeholder="나이를 입력해주세요.">
+            나이:
+            <input type="number" name="age" id="age" placeholder="나이를 입력해주세요." th:field="*{age}">
+            <span class="error" th:errors="*{age}"></span>
         </label><br>
         <label for="phone">
-            전화번호: <input type="text" name="phone" id="phone" placeholder="전화번호를 입력해주세요.">
+            전화번호:
+            <input type="text" name="phone" id="phone" placeholder="전화번호를 입력해주세요." th:field="*{phone}">
+            <span class="error" th:errors="*{phone}"></span>
         </label><br>
         <label for="birthday">
-            생년월일: <input type="date" name="birthday" id="birthday">
+            생년월일:
+            <input type="date" name="birthday" id="birthday" th:value="*{birthday}">
+            <span class="error" th:errors="*{birthday}"></span>
         </label><br>
         <label for="active">
             성향:

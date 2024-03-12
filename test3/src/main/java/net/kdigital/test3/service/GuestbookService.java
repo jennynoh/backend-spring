@@ -3,6 +3,7 @@ package net.kdigital.test3.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,30 @@ public class GuestbookService {
 		list.forEach((entity)->mybookDTOList.add(GuestbookEntity.toDTO(entity)));
 		return mybookDTOList;
 	}
+	
+	// 5) guestSeq 일치하는 방명록만 가져오기
+	public GuestbookDTO selectOne(Long seq) {
+		Optional<GuestbookEntity> entity = guestbookRepository.findById(seq);
+		if(entity.isPresent()) {
+			GuestbookDTO targetDTO = GuestbookEntity.toDTO(entity.get());
+			return targetDTO;
+		} else return null;
+		
+	}
+	
+	// 6) 방명록 수정
+	public GuestbookDTO updateOne(Long guestSeq, String updatedText) {
+		Optional<GuestbookEntity> entity = guestbookRepository.findById(guestSeq);
+		if(entity.isPresent()) {
+			GuestbookDTO targetDTO = GuestbookEntity.toDTO(entity.get());
+			targetDTO.setText(updatedText);
+			targetDTO.setUpdateDate(LocalDateTime.now());
+			guestbookRepository.deleteById(guestSeq);
+			guestbookRepository.save(GuestbookDTO.toEntity(targetDTO));
+			return targetDTO;
+		} else return null;
+	}
+	
+	
 
 }

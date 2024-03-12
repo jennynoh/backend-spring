@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.slf4j.Slf4j;
 import net.kdigital.test3.dto.GuestbookDTO;
@@ -66,6 +67,31 @@ public class GuestbookController {
 		
 		return "mybook";
 	}
+	
+	@GetMapping("/updateOne")
+	public String updateOne(
+			@RequestParam(name="guestSeq", defaultValue="-1") Long guestSeq,
+			Model model) {
+		log.info("수정할 guestSeq: {}", guestSeq);
+		
+		GuestbookDTO guestbookDTO = service.selectOne(guestSeq);
+		log.info("수정할 data: {}", guestbookDTO.toString());
+		
+		model.addAttribute("updateTarget", guestbookDTO);
+		return "updateForm";
+	}
+	
+	@PostMapping("/updateOne")
+	public String updateOne(
+			@RequestParam(name="guestSeq", defaultValue="-1") Long guestSeq,
+			@RequestParam(name="updatedText", defaultValue="") String updatedText,
+			RedirectAttributes rttr) {
+		
+		GuestbookDTO targetDTO = service.updateOne(guestSeq, updatedText);
+		rttr.addAttribute("userInput", targetDTO.getPwd());
+		return "redirect:/getMine";
+	}
+	
 	
 	
 }

@@ -37,7 +37,8 @@
             <p th:text="${guestbook.text}">방명록 내용</p>
             <div>
                 <input type="button" class="deleteOne" th:data_no="${guestbook.guestSeq}" value="삭제">
-                <input type="button" class="updateOne" th:data_no="${guestbook.guestSeq}" value="수정" disabled>
+                <input type="button" class="updateOne" th:data_no="${guestbook.guestSeq}" value="수정">
+                <p>임시: [[${guestbook.guestSeq}]] </p>
             </div>
         </div>
     </div>
@@ -52,11 +53,24 @@
             delBtns[i].addEventListener('click', delBook);
         }
 
+        let updateBtns = document.getElementsByClassName('updateOne');
+        for (let i = 0; i < updateBtns.length; ++i) {
+            updateBtns[i].addEventListener('click', updateBook);
+        }
+
         function delBook() {
             let data_no = this.getAttribute("data_no");
             document.getElementById('guestSeq').value = data_no;
+            document.getElementById('sendOne').action = 'deleteOne';
             document.getElementById('sendOne').submit();
         }
+        function updateBook() {
+            let data_no = this.getAttribute("data_no");
+            document.getElementById('guestSeq').value = data_no;
+            document.getElementById('sendOne').action = 'updateOne';
+            document.getElementById('sendOne').submit();
+        }
+
 
 
     </script>

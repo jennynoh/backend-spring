@@ -22,6 +22,7 @@ public class GuestbookDTO {
 	private String pwd;
 	private String text;
 	private LocalDateTime regdate;
+	private LocalDateTime updateDate;
 
 	// Entity -> DTO 메서드
 	public static GuestbookEntity toEntity(GuestbookDTO guestbookDTO) {
@@ -30,6 +31,7 @@ public class GuestbookDTO {
 				.pwd(guestbookDTO.getPwd())
 				.text(guestbookDTO.getText())
 				.regdate(guestbookDTO.getRegdate())
+				.updateDate(guestbookDTO.getUpdateDate())
 				.build();
 	}
 
