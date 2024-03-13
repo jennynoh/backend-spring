@@ -1,0 +1,23 @@
+@charset "UTF-8";
+@import "write.css";
+
+/* 글 내용 */
+pre {
+    width: 750px;
+    height: 200px;
+}
+
+/* 삭제, 수정, 목록 버튼 */
+div.buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-delete,
+.btn-update,
+.btn-list {
+    color: #fff;
+    background-color: #A36361;
+    border-color: #A36361;
+    margin: 10px;
+}

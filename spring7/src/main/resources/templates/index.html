@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- css 설정 -->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img th:src="@{/images/jindo_logo.png}" alt="logo">
+            <h2>Jindo Dog Community</h2>
+        </div>
+    </div>
+    <div class="gnb">
+        <ul>
+            <!-- 미인증 사용자에게 보이는 메뉴 -->
+            <li><a class="menu" th:href="@{/}">회원가입</a></li>
+            <li><a class="menu" th:href="@{/}">로그인</a></li>
+            <!-- 인증된 사용자에게 보이는 메뉴 -->
+            <li><a class="menu" th:href="@{/}">로그아웃</a></li>
+            <!-- 인증과 관계없음 -->
+            <li><a class="menu" th:href="@{/board/boardList}">게시판</a></li>
+        </ul>
+    </div>
+</body>
+
+</html>

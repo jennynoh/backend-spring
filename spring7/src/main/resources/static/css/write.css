@@ -1,0 +1,47 @@
+@charset "UTF-8";
+@import "list.css";
+
+/* 게시글 작성 화면 */
+
+div.container td {
+    text-align: left;
+    width: 800px;
+}
+
+div.container td input[type="text"],
+div.container td textarea {
+    width: 500px;
+}
+
+
+div.buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+
+/* 글등록 & 취소 */
+.btn {
+    padding: 5px;
+    width: 80px;
+}
+
+.btn {
+    color: #fff;
+    background-color: #A36361;
+    border-color: #A36361;
+    margin: 10px;
+}
+
+.btn-green {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.btn-red {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}

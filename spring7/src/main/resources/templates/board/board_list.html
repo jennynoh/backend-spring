@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 목록</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <a th:href="@{/}"><img th:src="@{/images/jindo_logo.png}" alt="logo"></a>
+            <h2>게시판</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <p th:if="${#lists.isEmpty(list)}">
+            <span>작성된 게시글이 없습니다.</span><br>
+            <span style="font-size: small;">첫 게시글의 주인공이 되어보세요! :&rpar;</span>
+        </p>
+        <div th:unless="${#lists.isEmpty(list)}">
+            <div class="upperbanner">
+                <!-- 전체 글 개수 -->
+                <div class="count">
+                    <p>게시글 개수: 0 </p>
+                </div>
+                <!-- 검색창 -->
+                <div class="search">
+                    <form action="" method="get">
+                        <select name="searchFilter" id="">
+                            <option value="all">전체</option>
+                            <option value="title">글 제목</option>
+                            <option value="content">글 내용</option>
+                            <option value="titleContent">제목+내용</option>
+                            <option value="writer">작성자</option>
+                        </select>
+                        <input type="text" name="keyword">
+                        <input type="submit" value="검색" disabled>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 게시글 목록 -->
+            <div class="content">
+                <table border="1">
+                    <tr>
+                        <th class="no">글번호</th>
+                        <th class="">제목</th>
+                        <th>작성자</th>
+                        <th>조회수</th>
+                        <th>작성일</th>
+                    </tr>
+                    <tr th:each="board, status : ${list}">
+                        <td th:text="${status.count}">글번호</td>
+                        <td><a th:href="@{/board/boardDetail(boardNum=${board.boardNum})}"
+                                th:text="${board.boardTitle}">글제목</a></td>
+                        <td th:text="${board.boardWriter}">작성자</td>
+                        <td th:text="${board.hitCount}">조회수</td>
+                        <td th:text="${#temporals.format(board.createDate, 'yy-MM-dd HH:mm:ss')}">작성일</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="write">
+                <a th:href="@{/board/boardWrite}"><input type="button" class="btn btn-write" value="글쓰기"></a>
+                <!-- <a href="">글쓰기</a> -->
+            </div>
+
+            <!-- page navigation -->
+            <nav class="pagination">
+                First
+                Prev
+                <a href="#">1</a>
+                2
+                3
+                4
+                5
+                Next
+                Last
+            </nav>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
