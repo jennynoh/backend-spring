@@ -11,3 +11,10 @@ CREATE TABLE board
     , create_date DATE default SYSDATE
     , update_date DATE
 );
+
+CREATE SEQUENCE board_seq;
+
+-- 첨부파일을 위한 컬럼 추가
+ALTER TABLE board ADD original_file_name VARCHAR2(200);
+ALTER TABLE board ADD saved_file_name VARCHAR2(200);
+

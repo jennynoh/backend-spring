@@ -17,7 +17,7 @@
     </div>
 
     <div class="container">
-        <form th:action="@{/board/boardUpdate}" method="post">
+        <form th:action="@{/board/boardUpdate}" method="post" enctype="multipart/form-data">
             <input type="hidden" name="boardNum" th:value="${board.boardNum}">
             <table border="1">
                 <tr>
@@ -32,7 +32,10 @@
                 </tr>
                 <tr>
                     <th>첨부파일</th>
-                    <td><input type="file" id="attachment" name="attachment"></td>
+                    <td>
+                        <input type="file" id="uploadFile" name="uploadFile">
+                        <span th:tex="${board.originalFileName}"></span>
+                    </td>
                 </tr>
                 <tr>
                     <th>글 내용</th>
@@ -46,6 +49,10 @@
                 <input type="submit" class="btn btn-green" value="등록"> &nbsp;
                 <input type="reset" class="btn btn-red" value="취소"> &nbsp;
                 <a th:href="@{/board/boardList}" class="btn btn-list">목록</a>
+            </div>
+            <div class="searchFilter">
+                <input type="hidden" name="searchFilter" th:value="${searchFilter}">
+                <input type="hidden" name="searchKeyword" th:value="${searchKeyword}">
             </div>
         </form>
     </div>

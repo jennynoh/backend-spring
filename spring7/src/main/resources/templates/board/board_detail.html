@@ -45,7 +45,8 @@
             <tr>
                 <th>첨부파일</th>
                 <td>
-                    <span><a href="#">doggy.jpg</a></span>
+                    <span><a th:href="@{/board/download(boardNum=${board.boardNum})}"
+                            th:text="${board.originalFileName}"></a></span>
                 </td>
             </tr>
             <tr>
@@ -58,9 +59,16 @@
         </table>
         <div class="buttons">
             <!-- <a href="" class="btn btn-write">삭제</a> -->
-            <a th:href="@{/board/boardDelete(boardNum=${board.boardNum})}" class="btn btn-delete">삭제</a>
-            <a th:href="@{/board/boardUpdate(boardNum=${board.boardNum})}" class="btn btn-update">수정</a>
-            <a th:href="@{/board/boardList}" class="btn btn-list">목록</a>
+            <a th:href="@{/board/boardDelete(boardNum=${board.boardNum}, searchFilter=${searchFilter}, searchKeyword=${searchKeyword})}"
+                class="btn btn-delete">삭제</a>
+            <a th:href="@{/board/boardUpdate(boardNum=${board.boardNum}, searchFilter=${searchFilter}, searchKeyword=${searchKeyword})}"
+                class="btn btn-update">수정</a>
+            <a th:href="@{/board/boardList(searchFilter=${searchFilter}, searchKeyword=${searchKeyword})}"
+                class="btn btn-list">목록</a>
+        </div>
+        <div class="searchFilter">
+            <input type="hidden" name="searchFilter" th:value="${searchFilter}">
+            <input type="hidden" name="searchKeyword" th:value="${searchKeyword}">
         </div>
 
     </div>

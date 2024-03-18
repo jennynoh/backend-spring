@@ -17,7 +17,8 @@
     </div>
 
     <div class="container">
-        <form th:action="@{/board/boardWrite}" method="post">
+        <!-- 일반파일: multipart/form-data, method는 무조건 Post -->
+        <form th:action="@{/board/boardWrite}" method="post" enctype="multipart/form-data">
             <table border="1">
                 <tr>
                     <th>작성자</th>
@@ -29,7 +30,7 @@
                 </tr>
                 <tr>
                     <th>첨부파일</th>
-                    <td><input type="file" id="attachment" name="attachment"></td>
+                    <td><input type="file" id="uploadFile" name="uploadFile"></td>
                 </tr>
                 <tr>
                     <th>글 내용</th>

@@ -2,6 +2,9 @@ package net.kdigital.board.entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -53,10 +56,18 @@ public class BoardEntity {
 	private int likeCount;
 	
 	@Column(name="create_date")
+	@CreationTimestamp // 객체가 처음 생성될 때 날짜를 자동으로 지정해주는 기능 
 	private LocalDateTime createDate;
 	
 	@Column(name="update_date")
+	@LastModifiedDate // 객체가 수정될 때 자동으로 날짜를 업데이트 해주는 기능 
 	private LocalDateTime updateDate;
+	
+	@Column(name="original_file_name")
+	private String originalFileName;
+	
+	@Column(name="saved_file_name")
+	private String savedFileName;
 	
 	public static BoardDTO toDTO(BoardEntity boardEntity) {
 		return BoardDTO.builder()
@@ -68,6 +79,8 @@ public class BoardEntity {
 				.likeCount(boardEntity.getLikeCount())
 				.createDate(boardEntity.getCreateDate())
 				.updateDate(boardEntity.getUpdateDate())
+				.originalFileName(boardEntity.getOriginalFileName())
+				.savedFileName(boardEntity.getSavedFileName())
 				.build();
 	}
 	

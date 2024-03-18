@@ -1,9 +1,15 @@
 package net.kdigital.board.controller;
 
+import java.io.FileInputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import net.kdigital.board.dto.BoardDTO;
 import net.kdigital.board.service.BoardService;
@@ -25,10 +33,25 @@ public class BoardController {
 		this.boardService = boardService;
 	}
 	
+	// 파일의 저장경로
+	@Value("${spring.servlet.multipart.location}")
+	String uploadPath;
+	
+	/* 글 목록 요청 
+	 * 1. index에서 넘어오는 경우 
+	 * 2. 검색해서 넘어오는 경우 
+	 */
 	@GetMapping("/boardList")
-	public String boardList(Model model) {
-		List<BoardDTO> list = boardService.selectAll();
+	public String boardList(
+			@RequestParam(name="searchFilter", defaultValue="") String searchFilter,
+			@RequestParam(name="searchKeyword", defaultValue="") String searchKeyword,
+			Model model) {
+//		System.out.println("===============" + searchFilter);
+//		System.out.println("===============" + searchKeyword);
+		List<BoardDTO> list = boardService.selectAll(searchFilter, searchKeyword);
 		model.addAttribute("list", list);
+		model.addAttribute("searchFilter", searchFilter);
+		model.addAttribute("searchKeyword", searchKeyword);
 		return "board/board_list";
 	}
 	
@@ -41,6 +64,9 @@ public class BoardController {
 	public String boardWrite(
 			@ModelAttribute BoardDTO boardDTO) {
 		log.info("글 저장 요청: {}", boardDTO.toString());
+		log.info("첨부파일명: {}", boardDTO.getUploadFile().getOriginalFilename());
+		log.info("첨부파일 크기: {}", boardDTO.getUploadFile().getSize());
+		log.info("첨부파일 타입: {}", boardDTO.getUploadFile().getContentType());
 		boardService.insertBoard(boardDTO);
 		return "redirect:/board/boardList";
 	}
@@ -48,17 +74,27 @@ public class BoardController {
 	@GetMapping("/boardDetail")
 	public String boardDetail(
 			@RequestParam(name="boardNum") Long boardNum,
+			@RequestParam(name="searchFilter", defaultValue="") String searchFilter,
+			@RequestParam(name="searchKeyword", defaultValue="") String searchKeyword,
 			Model model) {
 		BoardDTO boardDTO = boardService.selectOne(boardNum);
+		boardService.incrementHitcount(boardNum);
 		model.addAttribute("board", boardDTO);
+		model.addAttribute("searchFilter", searchFilter);
+		model.addAttribute("searchKeyword", searchKeyword);
 		return "board/board_detail";
 	}
 	
 	// 글 삭제 
 	@GetMapping("/boardDelete")
 	public String boardDelete(
-			@RequestParam(name="boardNum") Long boardNum) {
+			@RequestParam(name="boardNum") Long boardNum,
+			@RequestParam(name="searchFilter") String searchFilter,
+			@RequestParam(name="searchKeyword") String searchKeyword,
+			RedirectAttributes rttr) {
 		boardService.deleteOne(boardNum);
+		rttr.addAttribute("searchFilter", searchFilter);
+		rttr.addAttribute("searchKeyword", searchKeyword);
 		return "redirect:/board/boardList";
 	}
 	
@@ -66,10 +102,13 @@ public class BoardController {
 	@GetMapping("/boardUpdate")
 	public String boardUpdate(
 			@RequestParam(name="boardNum") Long boardNum,
+			@RequestParam(name="searchFilter") String searchFilter,
+			@RequestParam(name="searchKeyword") String searchKeyword,
 			Model model) {
 		BoardDTO boardDTO = boardService.selectOne(boardNum);
 		model.addAttribute("board", boardDTO);
-		
+		model.addAttribute("searchFilter", searchFilter);
+		model.addAttribute("searchKeyword", searchKeyword);
 		return "board/board_update";
 	}
 	
@@ -77,13 +116,60 @@ public class BoardController {
 	@PostMapping("/boardUpdate")
 	public String boardUpdate(
 			@ModelAttribute BoardDTO boardDTO,
+			@RequestParam(name="searchFilter") String searchFilter,
+			@RequestParam(name="searchKeyword") String searchKeyword,
 			RedirectAttributes rttr) {
 		boardService.updateOne(boardDTO);
 		rttr.addAttribute("boardNum", boardDTO.getBoardNum());
 //		log.info("============= {}", boardDTO.toString());
+		rttr.addAttribute("searchFilter", searchFilter);
+		rttr.addAttribute("searchKeyword", searchKeyword);
 		return "redirect:/board/boardDetail";
 	}
 	
+	// 전달받은 게시판 번호의 파일 다운로드 
+	@GetMapping("/download")
+	public String download(
+			@RequestParam(name="boardNum") Long boardNum
+			, HttpServletResponse response) {
+		BoardDTO boardDTO = boardService.selectOne(boardNum);
+		String originalFileName = boardDTO.getOriginalFileName();
+		String savedFileName = boardDTO.getSavedFileName();
+		
+		log.info("original: {}, saved: {}", originalFileName, savedFileName);
+		log.info("업로드패스: {}", uploadPath);
+		
+		// header 세팅 
+		try {
+			String tempName = URLEncoder.encode(
+					originalFileName, StandardCharsets.UTF_8.toString());
+			response.setHeader("Content-Disposition", "attachment;filename="+tempName);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		String fullPath = uploadPath+"/"+savedFileName;
+		
+		// 다운로드받기 위한 stream 설정 
+		FileInputStream filein = null;
+		ServletOutputStream fileout = null;
+		
+		try {
+			filein = new FileInputStream(fullPath);
+			fileout = response.getOutputStream();
+			
+			// 내부에 socket 통신 존재 
+			// 반복적으로 read -> write.... spring 제공 기능 
+			// filein 읽어서 fileout으로 내보내기 반복 
+			FileCopyUtils.copy(filein, fileout);
+			fileout.close();
+			filein.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 	
 	
 
