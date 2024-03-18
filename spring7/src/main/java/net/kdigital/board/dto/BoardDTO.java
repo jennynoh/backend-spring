@@ -49,5 +49,18 @@ public class BoardDTO {
 				.build();
 	}
 	
+	 // 페이징을 위한 생성자 생성
+	 // boardList에서 사용할 내용으로 추림
+	 public BoardDTO(Long boardNum, String boardWriter, String boardTitle, int hitCount, LocalDateTime createDate,
+	       String originalFileName) {
+	      super();
+	      this.boardNum = boardNum;
+	      this.boardWriter = boardWriter;
+	      this.boardTitle = boardTitle;
+	      this.hitCount = hitCount;
+	      this.createDate = createDate;
+	      this.originalFileName = originalFileName;
+	   }
+	
 	
 }

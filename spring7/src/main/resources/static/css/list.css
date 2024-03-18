@@ -98,3 +98,23 @@ nav.pagination {
     margin: 20px auto;
     text-align: center;
 }
+
+/* 현재 조회중인 페이지 */
+.current {
+    font-weight: bold;
+    color: #A36361;
+}
+
+.page-no {
+    display: inline-block;
+    width: 20px;
+    height: 30px;
+    padding: 0.4rem;
+    line-height: 1rem;
+    margin: 0px 2px;
+}
+
+.navi {
+    font-size: 1.3em;
+    width: 10px;
+}

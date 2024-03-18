@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,41 +30,78 @@ public class BoardService {
 	@Value("${spring.servlet.multipart.location}")
 	String uploadPath;
 	
+	@Value("${user.board.pageLimit}")
+	int pageLimit;
+	
 	
 	// 1. DB 전체조회 
-	public List<BoardDTO> selectAll(String searchFilter, String searchKeyword) {
+	public Page<BoardDTO> selectAll(Pageable pageable, String searchFilter, String searchKeyword) {
+		// pageable 추가 - 2024.03.18
+		int page = pageable.getPageNumber()-1;  // page 위치값 0부터 시작
+		 
+
 		// Java Reflection 기능을 이용할 수도 있음 
-		log.info("Board Service 실행: selectAll()");
-		List<BoardEntity> entityList = null;
+		// List<BoardEntity> entityList = null;
+		Page<BoardEntity> entityList = null;
+		// page
 		switch (searchFilter) {
 		case "all": 
 			entityList = boardRepository.findByAllContaining(searchKeyword, 
-					Sort.by(Sort.Direction.DESC, "createDate")); 
+					PageRequest.of(page, pageLimit)); 
+			// sort 쿼리 제외 
+			// Sort.by(Sort.Direction.DESC, "boardNum")
 			break;
 		case "title": 
 			entityList = boardRepository.findByBoardTitleContaining(searchKeyword, 
-					Sort.by(Sort.Direction.DESC, "createDate")); 
+					PageRequest.of(page, pageLimit)); 
 			break;
 		case "content": 
 			entityList = boardRepository.findByBoardContentContaining(searchKeyword, 
-					Sort.by(Sort.Direction.DESC, "createDate")); 
+					PageRequest.of(page, pageLimit)); 
 			break;
 		case "titleContent": 
-			entityList = boardRepository.findByTitleContentContaining(searchKeyword,
-					Sort.by(Sort.Direction.DESC, "createDate")); 
+			entityList = boardRepository.findByTitleContentContaining(searchKeyword, 
+					PageRequest.of(page, pageLimit)); 
 			break;
 		case "writer": 
 			entityList = boardRepository.findByBoardWriterContaining(searchKeyword, 
-					Sort.by(Sort.Direction.DESC, "createDate")); 
+					PageRequest.of(page, pageLimit)); 
 			break;
 		default:
-			entityList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "createDate")); break;
+			entityList = boardRepository.findAll(PageRequest.of(page, pageLimit)); break;
 		}
 		
 //		List<BoardEntity> entityList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "createDate"));
-		List<BoardDTO> dtoList = new ArrayList<>();
-		entityList.forEach((entity) -> dtoList.add(BoardEntity.toDTO(entity)));
-		return dtoList;
+//		List<BoardDTO> dtoList = new ArrayList<>();
+//		entityList.forEach((entity) -> dtoList.add(BoardEntity.toDTO(entity)));
+//		return null;
+		
+		
+		// 2024.03.18 - pageable  추가 
+//		 System.out.println("글 내용(getContent) :" + entityList.getContent());
+//	     System.out.println("글 개수(getTotalElements) :" + entityList.getTotalElements());
+//	     System.out.println("요청한 페이지 번호(getNumber) :" + entityList.getNumber());
+//	     System.out.println("총 페이지 수(getTotalPages) :" + entityList.getTotalPages());
+//	     System.out.println("한 페이지 글자 개수(getSize==pageLimit) :" + entityList.getSize());
+//	     System.out.println("이전 페이지(hasPrevious) :" + entityList.hasPrevious());
+//	     System.out.println("다음 페이지(hasNext) :" + entityList.hasNext());
+//	     System.out.println("첫번째 페이지(isFirst) :" + entityList.isFirst());
+//	     System.out.println("마지막 페이지(isLast) :" + entityList.isLast());
+
+	      
+	     // entityfmf dto로 변환하여 List에 담는 작업
+	     // entityList.forEach((entity) -> dtoList.add(BoardDTO.toDTO(entity)));
+		Page<BoardDTO> dtoList = null;
+	    dtoList = entityList.map(board ->
+	    	new BoardDTO(board.getBoardNum(),
+	    			board.getBoardWriter(),
+	    			board.getBoardTitle(),
+	    			board.getHitCount(),
+	    			board.getCreateDate(),
+	    			board.getOriginalFileName()));
+
+	      return dtoList;
+	   
 	}
 
 	

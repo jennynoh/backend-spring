@@ -25,12 +25,14 @@
             <div class="upperbanner">
                 <!-- 전체 글 개수 -->
                 <div class="count">
-                    <p>게시글 개수: 0 </p>
+                    <p>게시글 개수: [[ ${list.totalElements}]] </p>
                 </div>
                 <!-- 검색창 -->
                 <div class="search">
-                    <form th:action="@{/board/boardList(searchFilter=${searchFilter}, searchKeyword=${searchKeyword})}"
+                    <form id="searchForm"
+                        th:action="@{/board/boardList(searchFilter=${searchFilter}, searchKeyword=${searchKeyword})}"
                         method="get">
+                        <input type="hidden" name="page" id="requestPage" th:value="${page}">
                         <select name="searchFilter" id="">
                             <option value="all" th:selected="${searchFilter == 'all'}">전체</option>
                             <option value="title" th:selected="${searchFilter == 'title'}">글 제목</option>
@@ -46,6 +48,7 @@
 
             <!-- 게시글 목록 -->
             <div class="content">
+                <!-- list.number: [[${list.number}]] / list.size: [[${list.size}]] -->
                 <table border="1">
                     <tr>
                         <th class="no">글번호</th>
@@ -55,7 +58,11 @@
                         <th>작성일</th>
                     </tr>
                     <tr th:each="board, status : ${list}">
-                        <td th:text="${status.count}">글번호</td>
+                        <!-- list.number = 페이지 번호 -->
+                        <!-- list.size = 한 페이지당 보여지는 글 갯수 -->
+                        <!-- status.count = 현재 조회중인 페이지 -->
+                        <td th:text="${(list.number+1) * list.size - (list.size - status.count)}">글번호 - 페이징</td>
+                        <!-- <td th:text="${status.count}">글번호</td> -->
                         <td><a th:href="@{/board/boardDetail(boardNum=${board.boardNum}, 
                             searchFilter=${searchFilter}, searchKeyword=${searchKeyword})}"
                                 th:text="${board.boardTitle}">글제목</a>
@@ -76,19 +83,63 @@
 
             <!-- page navigation -->
             <nav class="pagination">
-                First
-                Prev
-                <a href="#">1</a>
-                2
-                3
-                4
-                5
-                Next
-                Last
+                <!-- 앞 그룹 -->
+                <!-- 2번 그룹 이상의 위치를 보고 있을 때 -->
+                <th:block th:if="${navi.startPageGroup > 1}">
+                    <a th:href="|javascript:pageFormSubmit(${navi.startPageGroup-1})|" class="page-no navi">&laquo;</a>
+                </th:block>
+                <!-- 1번 그룹 조회중일 때, 링크 제거  -->
+                <th:block th:unless="${navi.startPageGroup > 1}">
+                    <span class="page-no navi">&laquo;</span>
+                </th:block>
+
+                <!-- 앞 페이지 -->
+                <th:block th:if="${navi.page > 1}">
+                    <a class="page-no navi" th:href="|javascript:pageFormSubmit(${navi.page-1})|">&lsaquo;</a>
+                </th:block>
+                <!-- 1페이지 조회중일 때, 링크 제거 -->
+                <th:block th:unless="${navi.page > 1}">
+                    <span class="page-no navi">&lsaquo;</span>
+                </th:block>
+
+                <!-- 페이지 번호 출력 -->
+                <!-- #numbers.sequence: 일련번호 발생 -->
+                <span th:each="count : ${#numbers.sequence(navi.startPageGroup, navi.endPageGroup)}">
+                    <!-- 조회중인 페이지의 링크 제거 -->
+                    <span th:if="${navi.page == count}">
+                        <b class="page-no current" th:text="${count}"></b>
+                    </span>
+                    <span th:unless="${navi.page == count}">
+                        <a class="page-no" th:href="|javascript:pageFormSubmit(${count})|" th:text="${count}"></a>
+                    </span>
+                </span>
+
+                <!-- 뒷 페이지: 현재페이지가 total page보다 작으면(뒷페이지가 존재하면..) -->
+                <th:block th:if="${navi.totalPages > (navi.page)}">
+                    <a class="page-no navi" th:href="|javascript:pageFormSubmit(${navi.page+1})|">&rsaquo;</a>
+                </th:block>
+                <th:block th:unless="${navi.totalPages > (navi.page)}">
+                    <span class="page-no navi">&rsaquo;</span>
+                </th:block>
+
+                <!-- 뒷 그룹: endPageGroup = 10, endPageGroup + 1 = 다음 그룹의 첫페이지 -->
+                <th:block th:if="${navi.currentGroup &lt; navi.totalGroupCount}">
+                    <a class="page-no navi" th:href="|javascript:pageFormSubmit(${navi.endPageGroup+1})|">&raquo;</a>
+                </th:block>
+                <th:block th:unless="${navi.currentGroup &lt; navi.totalGroupCount}">
+                    <span class="page-no navi">&raquo;</span>
+                </th:block>
             </nav>
         </div>
     </div>
 
+    <script>
+        function pageFormSubmit(page) {
+            // alert(page);
+            document.getElementById("requestPage").value = page;
+            document.getElementById("searchForm").submit();
+        }
+    </script>
 
 </body>
 

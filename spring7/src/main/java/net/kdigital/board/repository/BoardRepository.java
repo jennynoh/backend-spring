@@ -1,7 +1,7 @@
 package net.kdigital.board.repository;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,15 +11,22 @@ import net.kdigital.board.entity.BoardEntity;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
 	
-	List<BoardEntity> findByBoardTitleContaining(String searchKeyword, Sort sort);
-	List<BoardEntity> findByBoardContentContaining(String searchKeyword, Sort sort);
-	List<BoardEntity> findByBoardWriterContaining(String searchKeyword, Sort sort);
+	Page<BoardEntity> findByBoardTitleContaining(String searchKeyword, PageRequest pageRequest);
+	Page<BoardEntity> findByBoardContentContaining(String searchKeyword, PageRequest pageRequest);
+	Page<BoardEntity> findByBoardWriterContaining(String searchKeyword, PageRequest pageRequest);
 	
 	@Query("SELECT b FROM BoardEntity b WHERE b.boardTitle LIKE %:keyword% OR b.boardContent LIKE %:keyword% OR b.boardWriter LIKE %:keyword%")
-	List<BoardEntity> findByAllContaining(@Param("keyword") String searchKeyword, Sort sort);
+	Page<BoardEntity> findByAllContaining(@Param("keyword") String searchKeyword, PageRequest pageRequest);
 
 	
 	@Query("SELECT b FROM BoardEntity b WHERE b.boardTitle LIKE %:keyword% OR b.boardContent LIKE %:keyword%")
-	List<BoardEntity> findByTitleContentContaining(@Param("keyword") String searchKeyword, Sort sort);
+	Page<BoardEntity> findByTitleContentContaining(@Param("keyword") String searchKeyword, PageRequest pageRequest);
 	
+	@Query("SELECT b FROM BoardEntity b")
+	Page<BoardEntity> findAll(PageRequest of);
+	/*
+	 * Offending method: 
+	 * public abstract org.springframework.data.domain.Page 
+	 * net.kdigital.board.repository.BoardRepository.findAll(org.springframework.data.domain.PageRequest,org.springframework.data.domain.Sort)
+	 */
 }

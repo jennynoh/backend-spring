@@ -4,9 +4,11 @@ import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -22,6 +24,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import net.kdigital.board.dto.BoardDTO;
 import net.kdigital.board.service.BoardService;
+import net.kdigital.board.util.PageNavigator;
 
 @Controller
 @Slf4j
@@ -33,25 +36,44 @@ public class BoardController {
 		this.boardService = boardService;
 	}
 	
-	// 파일의 저장경로
+	// 파일의 저장경로 읽어오기 
 	@Value("${spring.servlet.multipart.location}")
 	String uploadPath;
 	
+	// 한 페이지당 글의 갯수 - applicationproperties에서 읽어오기 
+	@Value("${user.board.pageLimit}")
+	int pageLimit;
+	
+	
 	/* 글 목록 요청 
-	 * 1. index에서 넘어오는 경우 
-	 * 2. 검색해서 넘어오는 경우 
+	 * 1. index에서 넘어오는 경우 searchFilter, searchKeyword 기본값 세팅 
+	 *  - 1페이지 요청 
+	 * 2. 검색해서 넘어오는 경우 searchFilter, searchKeyword 값 사용
+	 * 	- 1페이지 요청 
+	 * 3. 하단에 페이지 그룹을 선택할 경우 그 값을 사용 
 	 */
 	@GetMapping("/boardList")
 	public String boardList(
+			// spring에서 제공하는 기능, 없으면 3중 subquery쳐서 직접 작업해야함
+			// 변수 page: 사용자 지정 변수명, pageable 인터페이스 
+			@PageableDefault(page=1) Pageable pageable,
 			@RequestParam(name="searchFilter", defaultValue="") String searchFilter,
 			@RequestParam(name="searchKeyword", defaultValue="") String searchKeyword,
 			Model model) {
-//		System.out.println("===============" + searchFilter);
-//		System.out.println("===============" + searchKeyword);
-		List<BoardDTO> list = boardService.selectAll(searchFilter, searchKeyword);
+		// pageable parameter 추가해서 반환 
+		Page<BoardDTO> list = boardService.selectAll(pageable, searchFilter, searchKeyword);
+//		List<BoardDTO> list = boardService.selectAll( searchFilter, searchKeyword);
+		int totalPages = (int)list.getTotalPages();
+		int page = pageable.getPageNumber();
+		
+		
+		PageNavigator navi = new PageNavigator(pageLimit, page, totalPages);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("searchFilter", searchFilter);
 		model.addAttribute("searchKeyword", searchKeyword);
+		model.addAttribute("navi", navi);
+		
 		return "board/board_list";
 	}
 	
