@@ -6,6 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>새 글쓰기</title>
     <link rel="stylesheet" th:href="@{/css/detail.css}">
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            init();
+            $("#comment-register").on('click', writeComment);
+
+            // 모든 댓글 내용을 불러오는 함수 
+            function init() {
+
+            }
+
+            function writeComment() {
+                let boardNum = $("#boardNum").val();
+                let commentWriter = $("#commentWriter").val();
+                let commentText = $("#commentText").val();
+                let contextPath = $("#contextPath").val();
+                if (commentText.trim().length == 0) {
+                    alert("댓글 내용을 작성해주세요.")
+                    $("#commentText").focus();
+                    return;
+                }
+
+                // POST, url: /comment/commentInsert, 요청데이터: 작성자, 댓글 내용, 게시글 번호
+                $.ajax({
+                    url: contextPath + '/comment/commentInsert'
+                    , method: 'POST'
+                    , data: {
+                        "boardNum": boardNum, "commentWriter": commentWriter,
+                        "commentText": commentText
+                    }
+                    , success: function () { }
+                })
+            };
+        });
+    </script>
 </head>
 
 <body>
@@ -70,7 +105,21 @@
             <input type="hidden" name="searchFilter" th:value="${searchFilter}">
             <input type="hidden" name="searchKeyword" th:value="${searchKeyword}">
         </div>
+    </div>
+    <!-- 댓글 섹션 -->
+    <input type="hidden" id="boardNum" th:value="${board.boardNum}">
+    <input type="hidden" id="contextPath" th:value="${contextPath}">
+    <div class="container">
+        <!-- 댓글 목록 출력 -->
+        <div class="comment-list">
 
+        </div>
+        <!-- 댓글 작성 영역: 로그인한 사용자만 가능 -->
+        <span id="commentWriter" style="color: rgb(70, 69, 69); font-size: small;">주진명</span>
+        <div class="comment-write">
+            <textarea name="commentText" id="commentText" cols="50" rows="5" placeholder="댓글을 작성해주세요."></textarea>
+            <input type="button" class="btn btn-update" id="comment-register" value="등록">
+        </div>
     </div>
 
 

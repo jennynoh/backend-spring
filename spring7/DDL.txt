@@ -18,3 +18,14 @@ CREATE SEQUENCE board_seq;
 ALTER TABLE board ADD original_file_name VARCHAR2(200);
 ALTER TABLE board ADD saved_file_name VARCHAR2(200);
 
+ 2. 댓글 테이블
+ CREATE TABLE comments
+(
+    comment_num NUMBER PRIMARY KEY
+    , board_num NUMBER REFERENCES board(board_num) ON DELETE CASCADE
+    , comment_writer VARCHAR2(20)
+    , comment_text VARCHAR2(1000) NOT NULL
+    , create_date DATE DEFAULT sysdate
+);
+
+CREATE SEQUENCE comment_seq;

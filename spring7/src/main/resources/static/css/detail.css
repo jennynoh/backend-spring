@@ -21,3 +21,19 @@ div.buttons {
     border-color: #A36361;
     margin: 10px;
 }
+
+/* 댓글영역 */
+div.comment-write {
+    width: 1000px;
+    margin: 5px auto;
+    display: flex;
+    align-items: flex-end;
+}
+
+textarea#commentText {
+    display: inline-block;
+    width: 970px;
+    height: 100px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}

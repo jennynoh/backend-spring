@@ -1,14 +1,20 @@
 package net.kdigital.board.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -68,6 +74,19 @@ public class BoardEntity {
 	
 	@Column(name="saved_file_name")
 	private String savedFileName;
+	
+	/* 댓글과의 관계설정 
+	 * 1) @OneToMany 관계설정 
+	 * 2) mappedBy, cascade, orphanRemoval, fetchType 설정 
+	 * [선택] @OrderBy 설정 
+	 */
+	@OneToMany(mappedBy="boardEntity"
+			, cascade=CascadeType.REMOVE
+			, orphanRemoval = true
+			, fetch=FetchType.LAZY
+			)
+	@OrderBy("comment_num asc")
+	private List<CommentEntity> commentEntity = new ArrayList<>();
 	
 	public static BoardDTO toDTO(BoardEntity boardEntity) {
 		return BoardDTO.builder()
