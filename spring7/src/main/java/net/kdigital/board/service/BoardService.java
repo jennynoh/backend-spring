@@ -208,6 +208,16 @@ public class BoardService {
 			boardEntity.setHitCount(boardEntity.getHitCount()+1);
 		}
 	}
+
+
+	@Transactional
+	public int increaseLike(Long boardNum) {
+		BoardEntity targetEntity = boardRepository.findById(boardNum).get();
+		int originLike = targetEntity.getLikeCount();
+		targetEntity.setLikeCount(originLike+1);
+		return targetEntity.getLikeCount();
+		
+	}
 	
 	
 

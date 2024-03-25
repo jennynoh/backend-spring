@@ -11,15 +11,28 @@
         $(function () {
             init();
             $("#comment-register").on('click', writeComment);
+            $(".like_emoji").on('click', increaseLike);
 
             // 모든 댓글 내용을 불러오는 함수 
             function init() {
+                let contextPath = $("#contextPath").val();
+                let boardNum = $("#boardNum").val();
+                $.ajax({
+                    url: contextPath + '/comment/allComments'
+                    , method: 'GET'
+                    , data: { "boardNum": boardNum }
+                    , success: function (resp) {
+                        $.each(resp, function (index, item) {
+                            commentOutput(item);
+                        })
+                    }
+                })
 
             }
 
             function writeComment() {
                 let boardNum = $("#boardNum").val();
-                let commentWriter = $("#commentWriter").val();
+                let commentWriter = '주진명'; //$("#commentWriter").attr("text");
                 let commentText = $("#commentText").val();
                 let contextPath = $("#contextPath").val();
                 if (commentText.trim().length == 0) {
@@ -30,15 +43,67 @@
 
                 // POST, url: /comment/commentInsert, 요청데이터: 작성자, 댓글 내용, 게시글 번호
                 $.ajax({
-                    url: contextPath + '/comment/commentInsert'
+                    url: contextPath + '/comment/insertComment'
                     , method: 'POST'
                     , data: {
                         "boardNum": boardNum, "commentWriter": commentWriter,
                         "commentText": commentText
                     }
-                    , success: function () { }
+                    , success: commentOutput
                 })
             };
+
+            function commentOutput(resp) {
+                let result = `
+                <li class="comment_item">
+                    <div class="comment_area">
+                        <span class="comment_writer" style="color: rgb(70, 69, 69); font-size: small;">${resp["commentWriter"]}</span>
+                        <span class="comment_create_date" style="color: rgb(70, 69, 69); font-size: smaller;">${resp["createDate"]}</span>
+                        <br>
+                        <div class="comment_text_box">
+                            <p class="comment_text">${resp["commentText"]}</p>
+                        </div>
+                        <div class="button_area">
+                            <input type="button" class="delBtn" value="삭제" data-no=${resp["commentNum"]}>
+                        </div>
+                    </div>
+                    <hr>
+                </li>
+                `
+
+                $("ul.comment_list").append(result);
+                $(".delBtn").on('click', deleteComment);
+            }
+
+            function deleteComment() {
+                let commentNum = $(this).attr("data-no");
+                let contextPath = $("#contextPath").val();
+                $.ajax({
+                    url: contextPath + '/comment/deleteComment'
+                    , method: 'GET'
+                    , data: { "commentNum": commentNum }
+                    , success: function () {
+                        alert("댓글이 정상적으로 삭제되었습니다! :)");
+                    }
+                })
+
+                $(this).parent().parent().parent().remove();
+            }
+
+            // 좋아요 버튼 동작
+            function increaseLike() {
+                let boardNum = $("#boardNum").val();
+                let contextPath = $("#contextPath").val();
+
+                $.ajax({
+                    url: contextPath + '/board/increaseLike'
+                    , method: "GET"
+                    , data: { "boardNum": boardNum }
+                    , success: function (resp) {
+                        $(".like_count").text(resp);
+                    }
+                });
+            }
         });
     </script>
 </head>
@@ -47,7 +112,7 @@
     <div class="header">
         <div class="logo">
             <a th:href="@{/}"><img th:src="@{/images/jindo_logo.png}" alt="logo"></a>
-            <h2>새 글쓰기</h2>
+            <h2>게시글 보기</h2>
         </div>
     </div>
 
@@ -92,6 +157,8 @@
                 </td>
             </tr>
         </table>
+        <span class="like_emoji">🩷</span>
+        <em class="like_txt_label">좋아요</em>&nbsp;<em class="like_count" th:text="${board.likeCount}"></em>
         <div class="buttons">
             <!-- <a href="" class="btn btn-write">삭제</a> -->
             <a th:href="@{/board/boardDelete(boardNum=${board.boardNum}, searchFilter=${searchFilter}, searchKeyword=${searchKeyword})}"
@@ -108,14 +175,19 @@
     </div>
     <!-- 댓글 섹션 -->
     <input type="hidden" id="boardNum" th:value="${board.boardNum}">
-    <input type="hidden" id="contextPath" th:value="${contextPath}">
+    <input type="hidden" id="contextPath" th:value="${contextPath}"> <!--contextPath 변수에 저장된 contextPath값을 가지고옴-->
     <div class="container">
         <!-- 댓글 목록 출력 -->
-        <div class="comment-list">
+        <div class="commentBox">
+            <ul class="comment_list">
+            </ul>
 
         </div>
         <!-- 댓글 작성 영역: 로그인한 사용자만 가능 -->
-        <span id="commentWriter" style="color: rgb(70, 69, 69); font-size: small;">주진명</span>
+        <div class="comment-info">
+            <span id="commentWriter" style="color: rgb(70, 69, 69); font-size: small;">주진명</span> &nbsp;
+            <span id="createDate" style="color: rgb(70, 69, 69); font-size: smaller;">날짜 넣을거임</span>
+        </div>
         <div class="comment-write">
             <textarea name="commentText" id="commentText" cols="50" rows="5" placeholder="댓글을 작성해주세요."></textarea>
             <input type="button" class="btn btn-update" id="comment-register" value="등록">

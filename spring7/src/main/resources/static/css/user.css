@@ -1,0 +1,45 @@
+@charset "UTF-8";
+@import "main.css";
+
+/* 회원가입 화면 */
+/* .content {
+    width: 1000px;
+    margin: 0 auto;
+} */
+
+.content .section {
+    padding: 80px;
+}
+
+.section>.article {
+    width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 40px;
+}
+
+.section>.article>ul {
+    list-style-type: none;
+}
+
+.section>.article>ul>li {
+    color: #ccc;
+    width: 95%;
+}
+
+.section>.article>ul>li>input {
+    /* 영역 100%를 기준으로 icon, 여백등의 영역 60px을 뺀 나머지 영역 */
+    width: calc(100% - 60px);
+    background-color: #f7f7f7;
+    margin: 10px 0 0 10px;
+    padding: 10px;
+    border: inherit;
+}
+
+.buttons {
+    text-align: center;
+}
+
+.content .section.pointColor {
+    background: linear-gradient(45deg, rgba(78, 197, 217, 1) 0%, rgba(38, 59, 151, 1) 100%);
+}

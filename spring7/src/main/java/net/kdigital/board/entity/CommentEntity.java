@@ -48,7 +48,7 @@ public class CommentEntity {
 	 * 1) 부모(board)가 객체로 선언되어있어야함
 	 * 2) 관계를 맺을 때 @ManyToOne 관계 설정
 	 * 3) FetchType: EAGER (부모 끌려오면 같이 로드됨), LAZY (default, 요청할때 로드) 
-	 * 4) @JoinColumn 설정 
+	 * 4) @JoinColumn 설정 (foreign key)
 	 */
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="board_num")

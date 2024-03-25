@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import net.kdigital.board.dto.BoardDTO;
@@ -98,12 +100,17 @@ public class BoardController {
 			@RequestParam(name="boardNum") Long boardNum,
 			@RequestParam(name="searchFilter", defaultValue="") String searchFilter,
 			@RequestParam(name="searchKeyword", defaultValue="") String searchKeyword,
+			// servlet에 포함된 환경변수
+			HttpServletRequest request,
 			Model model) {
 		BoardDTO boardDTO = boardService.selectOne(boardNum);
 		boardService.incrementHitcount(boardNum);
+		String contextPath = request.getContextPath();
+		
 		model.addAttribute("board", boardDTO);
 		model.addAttribute("searchFilter", searchFilter);
 		model.addAttribute("searchKeyword", searchKeyword);
+		model.addAttribute("contextPath", contextPath);
 		return "board/board_detail";
 	}
 	
@@ -143,7 +150,6 @@ public class BoardController {
 			RedirectAttributes rttr) {
 		boardService.updateOne(boardDTO);
 		rttr.addAttribute("boardNum", boardDTO.getBoardNum());
-//		log.info("============= {}", boardDTO.toString());
 		rttr.addAttribute("searchFilter", searchFilter);
 		rttr.addAttribute("searchKeyword", searchKeyword);
 		return "redirect:/board/boardDetail";
@@ -191,6 +197,13 @@ public class BoardController {
 		}
 		
 		return null;
+	}
+	
+	@GetMapping("/increaseLike")
+	@ResponseBody
+	public int increaseLike(
+			@RequestParam(name="boardNum") Long boardNum) {
+		return boardService.increaseLike(boardNum);
 	}
 	
 	
