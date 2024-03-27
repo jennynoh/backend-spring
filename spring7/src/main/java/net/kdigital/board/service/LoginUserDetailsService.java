@@ -28,17 +28,23 @@ public class LoginUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 		// userId 검증 로직 작성 
 		log.info("{}", userId);
-		Optional<UserEntity> userEntity = userRepository.findById(userId);
+		UserEntity userEntity = userRepository.findById(userId)
+				.orElseThrow(() -> {
+					throw new UsernameNotFoundException("error 발생");
+				});
 		
-		if(userEntity.isPresent()) {
-			UserEntity entity = userEntity.get();
-			UserDTO userDTO = UserDTO.toDTO(entity);
-			
-			// UserDetails로 반환 (UserDTO -> UserDetails)
-			return new LoginUserDetails(userDTO);
-		}
+		UserDTO userDTO = UserDTO.toDTO(userEntity);
+		// UserDetails로 반환 (UserDTO -> UserDetails)
+		return new LoginUserDetails(userDTO);
+		
+//		if(userEntity.isPresent()) {
+//			UserEntity entity = userEntity.get();
+//			UserDTO userDTO = UserDTO.toDTO(entity);
+//			// UserDetails로 반환 (UserDTO -> UserDetails)
+//			return new LoginUserDetails(userDTO);
+//		}
 		// 저장된 유저 정보가 없을 때 null 반환 
-		return null;
+//		return null;
 	}
 
 }

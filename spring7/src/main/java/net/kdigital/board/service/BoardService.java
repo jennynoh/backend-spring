@@ -107,8 +107,7 @@ public class BoardService {
 	
 	// 2. DB에 게시글 저장 
 	public void insertBoard(BoardDTO boardDTO) {
-		// to be deleted after login func dev 
-		boardDTO.setBoardWriter("김뽀삐");		
+		// to be deleted after login func dev 		
 		log.info("저장경로: {}", uploadPath);
 		
 		// 첨부파일이 있으면 

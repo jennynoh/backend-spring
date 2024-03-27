@@ -1,5 +1,6 @@
 package net.kdigital.board.dto;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -9,6 +10,7 @@ import lombok.ToString;
 
 @ToString
 public class LoginUserDetails implements UserDetails {
+	private static final long serialVersionUID = 1L;
 	private String userId;
 	private String userName;
 	private String userPwd;
@@ -41,8 +43,18 @@ public class LoginUserDetails implements UserDetails {
 	// 계정의 권한 반환 요청 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		// role이 여러개인 사람의 role을 담을 array list 
+		Collection<GrantedAuthority> collection = new ArrayList<>();
+		collection.add(new GrantedAuthority(){
+			private static final long serialVersionUID = 1L;
+			// GrantedAuthority는 인터페이스이기 때문에 new를 할 수 없음 
+			@Override
+			public String getAuthority() {
+				return null;
+			}
+			
+		});
+		return collection;
 	}
 
 	@Override
@@ -50,9 +62,15 @@ public class LoginUserDetails implements UserDetails {
 		return this.userPwd;
 	}
 
+	// ID 반환(Override): 
 	@Override
 	public String getUsername() {
 		return this.userId;
+	}
+	
+	// 사용자 이름 반환할 떼 
+	public String getUserName() {
+		return this.userName;
 	}
 
 	

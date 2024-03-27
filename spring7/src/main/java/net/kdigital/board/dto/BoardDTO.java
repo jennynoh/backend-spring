@@ -20,7 +20,7 @@ import net.kdigital.board.entity.BoardEntity;
 @Builder
 public class BoardDTO {
 	private Long boardNum;
-	private String boardWriter;
+	private String boardWriter;  // 사용자 id (userId)
 	private String boardTitle;
 	private String boardContent;
 	private int hitCount;

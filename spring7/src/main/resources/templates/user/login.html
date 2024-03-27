@@ -16,7 +16,7 @@
     <div class="header">
         <div class="logo">
             <a th:href="@{/}"><img th:src="@{/images/jindo_logo.png}" alt="logo"></a>
-            <h2>회원가입</h2>
+            <h2>로그인</h2>
         </div>
     </div>
     <!-- 아이디, 패스워드, 이름, 이메일 -->
@@ -35,6 +35,10 @@
                             <input type="password" name="userPwd" placeholder="비밀번호">
                         </li>
                     </ul>
+                    <br>
+                    <th:block th:if="${error}">
+                        <div class="error_message" th:text="${errMessage}" style="color:red; font-size: smaller;"></div>
+                    </th:block>
                     <div class="buttons">
                         <input type="submit" id="submitBtn" value="로그인" class="btn btn-outline-primary">
                         <input type="reset" id="resetBtn" value="취소" class="btn btn-outline-secondary">

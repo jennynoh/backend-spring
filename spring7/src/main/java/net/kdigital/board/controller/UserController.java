@@ -1,9 +1,12 @@
 package net.kdigital.board.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,8 +51,29 @@ public class UserController {
 	 * @return
 	 */
 	@GetMapping("/user/login")
-	public String login() {
+	public String login(
+			// 첫화면에서 넘어올 때: required=false
+			// 에러로 넘어올 때: value 값 
+			@RequestParam(value="error", required=false) String error
+			, @RequestParam(value="errMessage", required=false) String errMessage
+			, Model model
+			) {
+		model.addAttribute("error", error);
+		model.addAttribute("errMessage", errMessage);
+		
 		return "user/login";
+	}
+	
+	/**
+	 * 
+	 */
+	@GetMapping("/user/idValidation")
+	@ResponseBody
+	public boolean idValidation(
+			@RequestParam(name="userInput") String input) {
+		// 사용가능한 아이디이면 true, 불가능한 아이디(중복)이면 false 반환
+		log.info("검증요청 input: {}", input);
+		return userService.find(input);
 	}
 
 }

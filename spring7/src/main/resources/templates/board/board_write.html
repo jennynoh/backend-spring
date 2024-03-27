@@ -22,7 +22,11 @@
             <table border="1">
                 <tr>
                     <th>작성자</th>
-                    <td><input type="text" id="boardWriter" name="boardWriter" readonly></td>
+                    <td>
+                        <!-- 현재 로그인한 사람의 아이디를 자동 입력-->
+                        <input id="boardWriter" name="boardWriter" type="text" th:value="${#authentication.name}"
+                            readonly>
+                    </td>
                 </tr>
                 <tr>
                     <th>글 제목</th>

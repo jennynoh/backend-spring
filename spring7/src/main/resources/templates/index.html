@@ -24,7 +24,7 @@
     <div class="gnb">
         <ul>
             <!-- 미인증 사용자에게 보이는 메뉴: isAnonymous() == true -->
-            <li sec:autorize="isAnonymous()">
+            <li sec:authorize="isAnonymous()">
                 <a class="menu" th:href="@{/user/join}">회원가입</a>
             </li>
             <li sec:authorize="isAnonymous()">
@@ -32,12 +32,23 @@
             </li>
             <!-- 인증된 사용자에게 보이는 메뉴 -->
             <li sec:authorize="isAuthenticated()">
-                <a class="menu" th:href="@{/user/logout}">로그아웃</a>
+                <!-- <a class="menu" th:href="@{/user/logout}"> [[${#authentication.name}]]님, 로그아웃</a> -->
+                <a class="menu" th:href="@{/user/logout}"> [[${userName}]]님, 로그아웃</a>
             </li>
             <!-- 인증과 관계없음 -->
             <li><a class="menu" th:href="@{/board/boardList}">게시판</a></li>
         </ul>
     </div>
+    <!-- 임시 출력확인 -->
+    <!-- <h2 sec:authorize="hasRole('ROLE_ADMIN')">관리자</h2>
+    <h2 sec:authorize="hasRole('ROLE_USER')">일반회원</h2>
+    <h2 sec:authorize="hasRole('ROLE_ANANYMOUS')">인증되지 않은 사용자</h2>
+    <h2 sec:authorize="isAuthenticated()">인증된 사용자</h2>
+    <h2 sec:authorize="isAnonymous()">인증되지 않은 사용자</h2> -->
+    <!-- 유저네임 -->
+    <!-- Name: <h2 sec:authentication="name"></h2> -->
+    <!-- 인증시 사용된 객체정보 -->
+    <!-- Principal: <h2 sec:authentication="principal"></h2> -->
 </body>
 
 </html>

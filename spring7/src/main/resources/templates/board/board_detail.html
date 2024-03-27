@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://thymeleaf.org">
+<html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -32,7 +32,7 @@
 
             function writeComment() {
                 let boardNum = $("#boardNum").val();
-                let commentWriter = '주진명'; //$("#commentWriter").attr("text");
+                let commentWriter = $("#loginId").val(); //$("#commentWriter").attr("text");
                 let commentText = $("#commentText").val();
                 let contextPath = $("#contextPath").val();
                 if (commentText.trim().length == 0) {
@@ -54,6 +54,7 @@
             };
 
             function commentOutput(resp) {
+                let loginId = $("#loginId").val();
                 let result = `
                 <li class="comment_item">
                     <div class="comment_area">
@@ -62,14 +63,20 @@
                         <br>
                         <div class="comment_text_box">
                             <p class="comment_text">${resp["commentText"]}</p>
-                        </div>
-                        <div class="button_area">
+                        </div>`
+                if (loginId == resp["commentWriter"]) {
+                    result += `<div class="button_area" th:if="${loginId == resp["commentWriter"]}">
+                            <input type="button" class="updateBtn" value="수정" data-no=${resp["commentNum"]}>
                             <input type="button" class="delBtn" value="삭제" data-no=${resp["commentNum"]}>
-                        </div>
-                    </div>
-                    <hr>
-                </li>
-                `
+                        </div>`
+                };
+
+                result += `</div>
+                                    <hr>
+                                </li>
+                                `
+                // // 로그인 아이디와 댓글쓴이의 아이디가 같으면 
+                // if ($("#loginId") == item.commentWriter); // allala... 
 
                 $("ul.comment_list").append(result);
                 $(".delBtn").on('click', deleteComment);
@@ -161,10 +168,16 @@
         <em class="like_txt_label">좋아요</em>&nbsp;<em class="like_count" th:text="${board.likeCount}"></em>
         <div class="buttons">
             <!-- <a href="" class="btn btn-write">삭제</a> -->
-            <a th:href="@{/board/boardDelete(boardNum=${board.boardNum}, searchFilter=${searchFilter}, searchKeyword=${searchKeyword})}"
-                class="btn btn-delete">삭제</a>
-            <a th:href="@{/board/boardUpdate(boardNum=${board.boardNum}, searchFilter=${searchFilter}, searchKeyword=${searchKeyword})}"
-                class="btn btn-update">수정</a>
+            <!-- 삭제, 수정버튼: 작성자와 로그인한 유저가 같은 경우에만 노출 -->
+            <!-- authentication.name: LoginUserDetails에서 반환 -->
+            <th:block th:if="${board.boardWriter == #authentication.name}"> <!-- th:block: 코드가 해석되고 나면 사라짐 -->
+                <a th:href="@{/board/boardDelete(boardNum=${board.boardNum}, searchFilter=${searchFilter}, searchKeyword=${searchKeyword})}"
+                    class="btn btn-delete">삭제</a>
+                <a th:href="@{/board/boardUpdate(boardNum=${board.boardNum}, searchFilter=${searchFilter}, searchKeyword=${searchKeyword})}"
+                    class="btn btn-update">수정</a>
+            </th:block>
+
+
             <a th:href="@{/board/boardList(searchFilter=${searchFilter}, searchKeyword=${searchKeyword})}"
                 class="btn btn-list">목록</a>
         </div>
@@ -176,21 +189,26 @@
     <!-- 댓글 섹션 -->
     <input type="hidden" id="boardNum" th:value="${board.boardNum}">
     <input type="hidden" id="contextPath" th:value="${contextPath}"> <!--contextPath 변수에 저장된 contextPath값을 가지고옴-->
+    <input type="hidden" id="loginId" th:value="${#authentication.name}">
+    <!-- or Controller에서 세션에 저장된 로그인 아이디를 Model에 함께 전달 -->
     <div class="container">
         <!-- 댓글 목록 출력 -->
         <div class="commentBox">
             <ul class="comment_list">
             </ul>
-
         </div>
         <!-- 댓글 작성 영역: 로그인한 사용자만 가능 -->
-        <div class="comment-info">
-            <span id="commentWriter" style="color: rgb(70, 69, 69); font-size: small;">주진명</span> &nbsp;
-            <span id="createDate" style="color: rgb(70, 69, 69); font-size: smaller;">날짜 넣을거임</span>
-        </div>
-        <div class="comment-write">
-            <textarea name="commentText" id="commentText" cols="50" rows="5" placeholder="댓글을 작성해주세요."></textarea>
-            <input type="button" class="btn btn-update" id="comment-register" value="등록">
+        <div class="writeComment" sec:authorize="isAuthenticated()">
+            <div class="comment-info">
+                <span id="commentWriter" style="color: rgb(70, 69, 69); font-size: small;"
+                    th:text="${#authentication.name}"></span>
+                &nbsp;
+                <span id="createDate" style="color: rgb(70, 69, 69); font-size: smaller;">날짜 넣을거임</span>
+            </div>
+            <div class="comment-write">
+                <textarea name="commentText" id="commentText" cols="50" rows="5" placeholder="댓글을 작성해주세요."></textarea>
+                <input type="button" class="btn btn-update" id="comment-register" value="등록">
+            </div>
         </div>
     </div>
 
