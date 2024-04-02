@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈</title>
+</head>
+
+<body>
+    <h2>[ 중고 거래 사이트 ]</h2>
+    <ul>
+        <li sec:authorize="isAnonymous()">
+            <a th:href="@{/user/join}">회원가입</a>
+        </li>
+        <li sec:authorize="isAnonymous()">
+            <a th:href="@{/user/login}">로그인</a>
+        </li>
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/user/logout}">로그아웃</a>
+        </li>
+        <li>
+            <a th:href="@{/board/boardList}">판매정보 게시판</a>
+        </li>
+        <li>
+            <a th:href="@{/board/boardSearch}">판매상품 검색</a>
+        </li>
+    </ul>
+</body>
+
+</html>

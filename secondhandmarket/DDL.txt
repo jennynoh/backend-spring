@@ -1,0 +1,41 @@
+1. market_member
+
+CREATE TABLE market_member
+(
+    member_id VARCHAR2(20) PRIMARY KEY
+    , member_pw VARCHAR2(100) NOT NULL
+    , member_name VARCHAR2(20) NOT NULL
+    , phone VARCHAR2(20) NOT NULL
+    , enabled CHAR(1) DEFAULT '1'
+    , rolename VARCHAR2(20) DEFAULT 'ROLE_USER'
+);
+
+2. market_board
+
+CREATE TABLE market_board
+(
+    board_num NUMBER PRIMARY KEY
+    , member_id VARCHAR2(20) NOT NULL
+    , title VARCHAR2(200) NOT NULL
+    , contents VARCHAR2(2000) NOT NULL
+    , input_date DATE DEFAULT SYSDATE
+    , category VARCHAR2(50)
+    , soldout CHAR(1) DEFAULT 'N'
+    , buyer_id VARCHAR2(20)
+);
+
+CREATE SEQUENCE market_board_seq;
+
+
+3. market_comment
+
+CREATE TABLE market_comment
+(
+    comment_num NUMBER PRIMARY KEY
+    , board_num NUMBER REFERENCES market_board(board_num) ON DELETE CASCADE
+    , member_id VARCHAR2(20) NOT NULL
+    , comment_text VARCHAR2(500)
+    , input_date DATE DEFAULT SYSDATE
+);
+
+CREATE SEQUENCE market_reply_seq;

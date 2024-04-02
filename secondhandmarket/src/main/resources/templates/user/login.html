@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+</head>
+
+<body>
+    <h2>[ 로그인 ]</h2>
+    <form th:action="@{/user/loginProc}" method="post">
+        <label for="memberId">아이디</label>
+        <input type="text" name="memberId" id="memberId" placeholder="아이디">
+        <br>
+        <label for="memberPwd">비밀번호</label>
+        <input type="password" name="memberPw" id="memberPw" placeholder="비밀번호">
+        <br>
+
+        <input type="submit" value="login">
+    </form>
+</body>
+
+</html>

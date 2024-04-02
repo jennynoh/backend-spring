@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $("form").submit(function (event) {
+                if (!valId() || !valPw() || !valName() || !valPhone()) {
+                    event.preventDefault();
+                }
+            });
+        });
+
+        function valId() {
+            let userInput = $("#memberId").val();
+            if (!(userInput.length >= 3 && userInput.length <= 10)) {
+                alert("ID는 3~10자로 입력하세요.");
+                return false;
+            }
+            return true;
+        }
+
+        function valPw() {
+            let userInput = $("#memberPw").val();
+            if (!(userInput.length >= 3 && userInput.length <= 10)) {
+                alert("비밀번호는 3~10자로 입력하세요.");
+                return false;
+            }
+            return true;
+        }
+
+        function valName() {
+            let userInput = $("#memberName").val();
+            if (userInput.trim().length == 0) {
+                alert("이름을 입력하세요.");
+                return false;
+            }
+            return true;
+        }
+
+        function valPhone() {
+            let userInput = $("#phone").val();
+            if (userInput.trim().length == 0) {
+                alert("전화번호를 입력하세요.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <h2>[ 회원가입 ]</h2>
+    <form th:action="@{/user/joinProc}" method="post">
+        <label for="memberId">아이디</label>
+        <input type="text" name="memberId" id="memberId" placeholder="아이디">
+        <br><br>
+        <label for="memberPw">비밀번호</label>
+        <input type="password" name="memberPw" id="memberPw" placeholder="비밀번호">
+        <br><br>
+        <label for="memberName">이름</label>
+        <input type="text" name="memberName" id="memberName" placeholder="이름">
+        <br><br>
+        <label for="phone">전화번호</label>
+        <input type="text" name="phone" id="phone" placeholder="전화번호">
+        <br><br>
+
+        <input type="submit" value="가입">
+        <input type="reset" value="다시쓰기">
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>판매정보</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            init();
+            $("#register_comment").on('click', writeComment);
+
+            function init() {
+                let boardNum = $("#boardNum").val();
+                $.ajax({
+                    url: '/comment/allComments'
+                    , method: 'GET'
+                    , data: { "boardNum": boardNum }
+                    , success: function (resp) {
+                        $.each(resp, function (index, item) {
+                            commentOutput(item);
+                        });
+                    }
+                })
+            }
+
+            function writeComment() {
+                let boardNum = $("#boardNum").val();
+                let memberId = $("#memberId").val();
+                let commentText = $("#commentText").val();
+                if (commentText.trim().length == 0) {
+                    alert("댓글 내용을 작성해주세요.");
+                    $("#commentText").focus();
+                    return;
+                }
+
+                $.ajax({
+                    url: '/comment/insertComment'
+                    , method: 'post'
+                    , data: { "boardNum": boardNum, "memberId": memberId, "commentText": commentText }
+                    , success: commentOutput
+                })
+            };
+
+            function commentOutput(resp) {
+                // let formattedDate = moment(resp["inputDate"]).format('YYYY-MM-DD HH:mm:ss');
+                let result = `
+                    <tr>
+                        <td width="100px">${resp["memberId"]}</td>
+                        <td width="500px">${resp["commentText"]}</td>
+                        <td width="300px">${resp["inputDate"]}</td>
+                    </tr>
+                        `
+                $(".comment_list").append(result);
+            }
+
+        });
+    </script>
+</head>
+
+<body>
+    <h2>[ 판매 정보 ]</h2>
+    <div class="content-box">
+        <table>
+            <tr>
+                <th width="200px">작성자</th>
+                <td>
+                    <span th:text="${board.memberId}"></span>
+                </td>
+            </tr>
+            <tr>
+                <th width="200px">작성일</th>
+                <td>
+                    <span th:text="${#temporals.format(board.inputDate, 'yy-MM-dd HH:mm:ss')}"></span>
+                </td>
+            </tr>
+            <tr>
+                <th width="200px">제목</th>
+                <td>
+                    <span th:text="${board.title}"></span>
+                </td>
+            </tr>
+            <tr>
+                <th width="200px">내용</th>
+                <td>
+                    <pre>[[ ${board.contents} ]]</pre>
+                </td>
+            </tr>
+        </table>
+        <!-- th:if 조건으로 사용자에 따라 동적으로 노출 -->
+        <span th:if="${board.memberId == #authentication.name}">
+            <a th:href="@{/board/boardDelete(boardNum=${board.boardNum})}">삭제</a>
+        </span>
+        <span th:if="${board.memberId != #authentication.name}">
+            <a th:href="@{/board/boardBuy(boardNum=${board.boardNum}, buyerId=${#authentication.name})}">구매하기</a>
+        </span>
+    </div>
+
+    <!-- 댓글 -->
+    <input type="hidden" id="boardNum" th:value="${board.boardNum}">
+    <input type="hidden" id="memberId" th:value="${#authentication.name}">
+    <div class="comment-box write">
+        <span>
+            <input type="text" style="width: 700px;" id="commentText" placeholder="댓글을 작성해주세요.">
+            <input type="submit" id="register_comment" value="확인">
+        </span>
+    </div>
+    <div class="comment-box list">
+        <!-- DB에서 댓글정보 불러와서 show -->
+        <table class="comment_list">
+
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>판매글 상품 검색</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $("#searchOption").on('change', searchOptionOutput);
+            $("#searchKeyword").on('keyup', searchKeywordOutput);
+            let originalhtml = $("table tbody").html();
+
+            function searchOptionOutput() {
+                let category = $("#searchOption").val();
+                if (category == "all") {
+                    $("table tbody").html(originalhtml);
+                } else {
+                    $.ajax({
+                        url: '/board/searchCategory'
+                        , method: 'get'
+                        , data: { "category": category }
+                        , success: output
+                    });
+                }
+            }
+
+            function searchKeywordOutput() {
+                let keyword = $("#searchKeyword").val();
+                $.ajax({
+                    url: '/board/searchKeyword'
+                    , method: 'get'
+                    , data: { "keyword": keyword }
+                    , success: output
+                });
+            }
+
+            function output(resp) {
+                let data = ``;
+                $.each(resp, function (index, item) {
+                    data += `
+                        <tr>
+                            <td>${item["boardNum"]}</td>
+                            <td>${item["category"]}</td>
+                            <td>${item["title"]}</td>
+                        </tr>
+                `
+                });
+
+                $("table tbody").html(data);
+            }
+        });
+
+    </script>
+</head>
+
+<body>
+    <h2>[ 판매 상품 검색 ]</h2>
+    <div class="search-section">
+        <select name="searchOption" id="searchOption">
+            <option value="all">전체</option>
+            <option value="computer">컴퓨터 및 주변기기</option>
+            <option value="camera">카메라</option>
+            <option value="car">자동차 용품</option>
+        </select>
+        <input type="text" id="searchKeyword" name="seachKeyword">
+    </div>
+    <div class="container">
+        <p th:if="${#lists.isEmpty(list)}">
+            <span>작성된 게시글이 없습니다.</span><br>
+        </p>
+        <div th:unless="${#lists.isEmpty(list)}">
+            <!-- 게시글 목록 -->
+            <div class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>카테고리</th>
+                            <th width="400px">제목</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="board, status : ${list}">
+                            <td th:text="${board.boardNum}">글번호</td>
+                            <td th:text="${board.category}">카테고리</td>
+                            <td th:text="${board.title}">제목</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+</body>
+
+</html>

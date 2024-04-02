@@ -1,0 +1,246 @@
+Script started on Wed Mar 27 15:46:37 2024
+/Users/jaeeunjennynoh/.zshrc:1: permission denied: /Users/jaeeunjennynoh
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air fastapiEnv % [K[?2004haactivate.a bat[?2004l
+zsh: command not found: activate.bat
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air fastapiEnv % [K[?2004hbbun b bin[?2004l
+zsh: command not found: bin
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air fastapiEnv % [K[?2004h//bin  /  ccs bin[?2004l
+zsh: command not found: cs
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air fastapiEnv % [K[?2004hccd boi  in[?2004l
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004hppip install fast            p  aactivate[?2004l
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004haacti  a  ppip install fastapi[?2004l
+zsh: command not found: pip
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004hppip p  !!pip install fastapi [K[K[?2004l
+pip install fastapi install fastapi
+zsh: command not found: pip
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004h[?2004l
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004haactivate[?2004l
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004hppip install fastapi= [K==0.741 .1[?2004l
+zsh: command not found: pip
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004h//Users/jaeeunjennyno [Khh/git/backend-spring/fastapiEnv/bin/python /Users/jaeeunjennynoh/ [Kggit/backend-spring/spring7/PredictServer/main.py[?2004l
+Traceback (most recent call last):
+  File "/Users/jaeeunjennynoh/git/backend-spring/spring7/PredictServer/main.py", line 2, in <module>
+    from fastapi import FastAPI
+ModuleNotFoundError: No module named 'fastapi'
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004h//Users/jaeeunjennyno [Khh/git/backend-spring/fastapiEnv/bin/python /Users/jaeeunjennynoh/ [Kggit/backend-spring/spring7/PredictServer/main.py[?2004l
+Traceback (most recent call last):
+  File "/Users/jaeeunjennynoh/git/backend-spring/spring7/PredictServer/main.py", line 2, in <module>
+    from fastapi import FastAPI
+ModuleNotFoundError: No module named 'fastapi'
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004h.../[?2004l
+zsh: permission denied: ../
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004h.../[?2004l
+zsh: permission denied: ../
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004h,,,. ,  .../[?2004l
+zsh: permission denied: ../
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004h.../[?2004l
+zsh: permission denied: ../
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004hccd../[?2004l
+zsh: no such file or directory: cd../
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air bin % [K[?2004hccd ../[?2004l
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air fastapiEnv % [K[?2004hccd ../[?2004l
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air backend-spring % [K[?2004hc p [7msudo pyth[7mo[7mn3 -m pip install fastapi[27m[K[A[30C[27ms[27mu[27md[27mo[27m [27mp[27my[27mt[27mho[27mn[27m3[27m [27m-[27mm[27m [27mp[27mi[27mp[27m [27mi[27mn[27ms[27mt[27ma[27ml[27ml[27m [27mf[27ma[27ms[27mt[27ma[27mp[27mi[?2004l
+Password:
+[33mWARNING: The directory '/Users/jaeeunjennynoh/Library/Caches/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.[0m[33m
+[0mCollecting fastapi
+  Downloading fastapi-0.110.0-py3-none-any.whl.metadata (25 kB)
+Collecting pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4 (from fastapi)
+  Downloading pydantic-2.6.4-py3-none-any.whl.metadata (85 kB)
+[?25l     [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/85.1 kB[0m [31m?[0m eta [36m-:--:--[0m[2K     [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m85.1/85.1 kB[0m [31m5.0 MB/s[0m eta [36m0:00:00[0m
+[?25hCollecting starlette<0.37.0,>=0.36.3 (from fastapi)
+  Downloading starlette-0.36.3-py3-none-any.whl.metadata (5.9 kB)
+Collecting typing-extensions>=4.8.0 (from fastapi)
+  Downloading typing_extensions-4.10.0-py3-none-any.whl.metadata (3.0 kB)
+Collecting annotated-types>=0.4.0 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi)
+  Downloading annotated_types-0.6.0-py3-none-any.whl.metadata (12 kB)
+Collecting pydantic-core==2.16.3 (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->fastapi)
+  Downloading pydantic_core-2.16.3-cp311-cp311-macosx_11_0_arm64.whl.metadata (6.5 kB)
+Collecting anyio<5,>=3.4.0 (from starlette<0.37.0,>=0.36.3->fastapi)
+  Downloading anyio-4.3.0-py3-none-any.whl.metadata (4.6 kB)
+Collecting idna>=2.8 (from anyio<5,>=3.4.0->starlette<0.37.0,>=0.36.3->fastapi)
+  Downloading idna-3.6-py3-none-any.whl.metadata (9.9 kB)
+Collecting sniffio>=1.1 (from anyio<5,>=3.4.0->starlette<0.37.0,>=0.36.3->fastapi)
+  Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+Downloading fastapi-0.110.0-py3-none-any.whl (92 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/92.1 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m92.1/92.1 kB[0m [31m14.7 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading pydantic-2.6.4-py3-none-any.whl (394 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/394.9 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;249;38;114m━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━[0m [32m143.4/394.9 kB[0m [31m4.5 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━[0m [32m307.2/394.9 kB[0m [31m4.6 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m394.9/394.9 kB[0m [31m4.3 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading pydantic_core-2.16.3-cp311-cp311-macosx_11_0_arm64.whl (1.7 MB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/1.7 MB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;249;38;114m━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.1/1.7 MB[0m [31m5.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.2/1.7 MB[0m [31m5.3 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━[0m [32m0.5/1.7 MB[0m [31m5.1 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━[0m [32m0.7/1.7 MB[0m [31m4.9 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━[0m [32m0.8/1.7 MB[0m [31m4.8 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━[0m [32m1.1/1.7 MB[0m [31m4.8 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━[0m [32m1.2/1.7 MB[0m [31m4.6 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━[0m [32m1.3/1.7 MB[0m [31m4.7 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━[0m [32m1.5/1.7 MB[0m [31m4.5 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m1.7/1.7 MB[0m [31m4.7 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m1.7/1.7 MB[0m [31m4.7 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading starlette-0.36.3-py3-none-any.whl (71 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/71.5 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m71.5/71.5 kB[0m [31m8.4 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading typing_extensions-4.10.0-py3-none-any.whl (33 kB)
+Downloading annotated_types-0.6.0-py3-none-any.whl (12 kB)
+Downloading anyio-4.3.0-py3-none-any.whl (85 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/85.6 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m85.6/85.6 kB[0m [31m14.1 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading idna-3.6-py3-none-any.whl (61 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/61.6 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m61.6/61.6 kB[0m [31m8.2 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+Installing collected packages: typing-extensions, sniffio, idna, annotated-types, pydantic-core, anyio, starlette, pydantic, fastapi
+Successfully installed annotated-types-0.6.0 anyio-4.3.0 fastapi-0.110.0 idna-3.6 pydantic-2.6.4 pydantic-core-2.16.3 sniffio-1.3.1 starlette-0.36.3 typing-extensions-4.10.0
+[33mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv[0m[33m
+[0m[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air backend-spring % [K[?2004h[7msudo pyth[7mo[7mn3 -m pip install 'uvicorn[[27m[K
+[7mstandard]'[27m[K[A[A[46C[27ms[27mu[27md[27mo[27m [27mp[27my[27mt[27mho[27mn[27m3[27m [27m-[27mm[27m [27mp[27mi[27mp[27m [27mi[27mn[27ms[27mt[27ma[27ml[27ml[27m [27m'[27mu[27mv[27mi[27mc[27mo[27mr[27mn[27m[[1B[27ms[27mt[27ma[27mn[27md[27ma[27mr[27md[27m][27m'[?2004l
+[33mWARNING: The directory '/Users/jaeeunjennynoh/Library/Caches/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.[0m[33m
+[0mCollecting uvicorn[standard]
+  Downloading uvicorn-0.29.0-py3-none-any.whl.metadata (6.3 kB)
+Collecting click>=7.0 (from uvicorn[standard])
+  Downloading click-8.1.7-py3-none-any.whl.metadata (3.0 kB)
+Collecting h11>=0.8 (from uvicorn[standard])
+  Downloading h11-0.14.0-py3-none-any.whl.metadata (8.2 kB)
+Collecting httptools>=0.5.0 (from uvicorn[standard])
+  Downloading httptools-0.6.1-cp311-cp311-macosx_10_9_universal2.whl.metadata (3.6 kB)
+Collecting python-dotenv>=0.13 (from uvicorn[standard])
+  Downloading python_dotenv-1.0.1-py3-none-any.whl.metadata (23 kB)
+Collecting pyyaml>=5.1 (from uvicorn[standard])
+  Downloading PyYAML-6.0.1-cp311-cp311-macosx_11_0_arm64.whl.metadata (2.1 kB)
+Collecting uvloop!=0.15.0,!=0.15.1,>=0.14.0 (from uvicorn[standard])
+  Downloading uvloop-0.19.0-cp311-cp311-macosx_10_9_universal2.whl.metadata (4.9 kB)
+Collecting watchfiles>=0.13 (from uvicorn[standard])
+  Downloading watchfiles-0.21.0-cp311-cp311-macosx_11_0_arm64.whl.metadata (4.9 kB)
+Collecting websockets>=10.4 (from uvicorn[standard])
+  Downloading websockets-12.0-cp311-cp311-macosx_11_0_arm64.whl.metadata (6.6 kB)
+Requirement already satisfied: anyio>=3.0.0 in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from watchfiles>=0.13->uvicorn[standard]) (4.3.0)
+Requirement already satisfied: idna>=2.8 in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from anyio>=3.0.0->watchfiles>=0.13->uvicorn[standard]) (3.6)
+Requirement already satisfied: sniffio>=1.1 in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from anyio>=3.0.0->watchfiles>=0.13->uvicorn[standard]) (1.3.1)
+Downloading click-8.1.7-py3-none-any.whl (97 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/97.9 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m97.9/97.9 kB[0m [31m5.3 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading h11-0.14.0-py3-none-any.whl (58 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/58.3 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m58.3/58.3 kB[0m [31m4.5 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading httptools-0.6.1-cp311-cp311-macosx_10_9_universal2.whl (145 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/145.9 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m145.9/145.9 kB[0m [31m4.6 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading python_dotenv-1.0.1-py3-none-any.whl (19 kB)
+Downloading PyYAML-6.0.1-cp311-cp311-macosx_11_0_arm64.whl (167 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/167.5 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m167.5/167.5 kB[0m [31m6.1 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading uvloop-0.19.0-cp311-cp311-macosx_10_9_universal2.whl (1.4 MB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/1.4 MB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;249;38;114m━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.2/1.4 MB[0m [31m4.3 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.3/1.4 MB[0m [31m4.3 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━[0m [32m0.5/1.4 MB[0m [31m4.3 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━[0m [32m0.7/1.4 MB[0m [31m4.3 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━[0m [32m0.9/1.4 MB[0m [31m4.3 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━[0m [32m1.0/1.4 MB[0m [31m4.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━[0m [32m1.2/1.4 MB[0m [31m4.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m1.4/1.4 MB[0m [31m4.4 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m1.4/1.4 MB[0m [31m4.3 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading watchfiles-0.21.0-cp311-cp311-macosx_11_0_arm64.whl (418 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/418.2 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;249;38;114m━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━[0m [32m112.6/418.2 kB[0m [31m3.5 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;249;38;114m━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━[0m [32m276.5/418.2 kB[0m [31m4.8 MB/s[0m eta [36m0:00:01[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m418.2/418.2 kB[0m [31m4.5 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading websockets-12.0-cp311-cp311-macosx_11_0_arm64.whl (121 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/121.3 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m121.3/121.3 kB[0m [31m4.2 MB/s[0m eta [36m0:00:00[0m
+[?25hDownloading uvicorn-0.29.0-py3-none-any.whl (60 kB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/60.8 kB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;2;114;156;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m60.8/60.8 kB[0m [31m17.6 MB/s[0m eta [36m0:00:00[0m
+[?25hInstalling collected packages: websockets, uvloop, pyyaml, python-dotenv, httptools, h11, click, watchfiles, uvicorn
+Successfully installed click-8.1.7 h11-0.14.0 httptools-0.6.1 python-dotenv-1.0.1 pyyaml-6.0.1 uvicorn-0.29.0 uvloop-0.19.0 watchfiles-0.21.0 websockets-12.0
+[33mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv[0m[33m
+[0m[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air backend-spring % [K[?2004h//Users/ja [Keeeunjennynoh/git/backend-spring/fastapiEnv/bin/python /Users/jaee [Kuunjennynoh/git/backend-spring/spring7/PredictServer/main.py[?2004l
+Traceback (most recent call last):
+  File "/Users/jaeeunjennynoh/git/backend-spring/spring7/PredictServer/main.py", line 2, in <module>
+    from fastapi import FastAPI
+ModuleNotFoundError: No module named 'fastapi'
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air backend-spring % [K[?2004h//Users/ja [Keeeunjennynoh/anaconda3/bin/python /Users/jaeeunjennynoh/git/backe [Knnd-spring/spring7/PredictServer/main.py[?2004l
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air backend-spring % [K[?2004h//Users/ja [Keeeunjennynoh/anaconda3/bin/python /Users/jaeeunjennynoh/git/backe [Knnd-spring/spring7/PredictServer/main.py[?2004l
+OK
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air backend-spring % [K[?2004h//Users/ja [Keeeunjennynoh/anaconda3/bin/python /Users/jaeeunjennynoh/git/backe [Knnd-spring/spring7/PredictServer/main.py[?2004l
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air backend-spring % [K[?2004h//Users/ja [Keeeunjennynoh/anaconda3/bin/python /Users/jaeeunjennynoh/git/backe [Knnd-spring/spring7/PredictServer/main.py[?2004l
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air backend-spring % [K[?2004huuvicorn m [Kaain:app     a [K[A[64C[K[1B[K[A[64C     u  [?2004l[1B[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air backend-spring % [K[?2004huuvicorn     u  ccd spring [K7[?2004l
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air spring7 % [K[?2004hccd c  lls[?2004l
+DDL.txt		README.txt	gradle		settings.gradle
+HELP.md		bin		gradlew		src
+PredictServer	build.gradle	gradlew.bat
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air spring7 % [K[?2004hccd PredictServc er [K[K[?2004l
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air PredictServer % [K[?2004hc mmodel[?2004l
+zsh: command not found: model
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air PredictServer % [K[?2004h[ ccd model[?2004l
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air model % [K[?2004huuvicorn main:apoo   pp[?2004l
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/bin/uvicorn", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/click/core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/main.py", line 409, in main
+    run(
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/main.py", line 575, in run
+    server.run()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "uvloop/loop.pyx", line 1517, in uvloop.loop.Loop.run_until_complete
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/config.py", line 433, in load
+    self.loaded_app = import_from_string(self.app)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/importer.py", line 22, in import_from_string
+    raise exc from None
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/Users/jaeeunjennynoh/git/backend-spring/spring7/PredictServer/model/main.py", line 3, in <module>
+    import pandas as pd 
+    ^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'pandas'
+[1m[7m%[27m[1m[0m                                                                 [0m[27m[24m[J(base) jaeeunjennynoh@Jaes-MacBook-Air model % [K[?2004hppip install         p  ㅕ  uuvicorn mainm :app - [K--reload[?2004l
+[32mINFO[0m:     Will watch for changes in these directories: ['/Users/jaeeunjennynoh/git/backend-spring/spring7/PredictServer/model']
+[32mINFO[0m:     Uvicorn running on [1mhttp://127.0.0.1:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     Started reloader process [[36m[1m31286[0m] using [36m[1mWatchFiles[0m
+Process SpawnProcess-1:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/_subprocess.py", line 78, in subprocess_started
+    target(sockets=sockets)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "uvloop/loop.pyx", line 1517, in uvloop.loop.Loop.run_until_complete
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/config.py", line 433, in load
+    self.loaded_app = import_from_string(self.app)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/importer.py", line 22, in import_from_string
+    raise exc from None
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/Users/jaeeunjennynoh/git/backend-spring/spring7/PredictServer/model/main.py", line 3, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'

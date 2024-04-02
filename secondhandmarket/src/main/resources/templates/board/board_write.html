@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>판매글 등록</title>
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $("form").submit(function (event) {
+                if (!valTitle() || !valContents()) {
+                    event.preventDefault();
+                }
+            });
+
+            function valTitle() {
+                let title = $("#title").val();
+                if (title.trim().length == 0) {
+                    alert("제목을 입력하세요.");
+                    $("#title").focus;
+                    return false;
+                } else return true;
+            }
+
+            function valContents() {
+                let contents = $("#contents").val();
+                if (contents.trim().length == 0) {
+                    alert("내용을 입력하세요.");
+                    $("#contents").focus();
+                    return false;
+                } else return true;
+            }
+
+        });
+    </script>
+</head>
+
+<body>
+    <h2>[ 판매글 등록 ]</h2>
+
+    <div class="container">
+        <form th:action="@{/board/boardWrite}" method="post">
+            <table>
+                <tr>
+                    <th>카테고리</th>
+                    <td>
+                        <select name="category" id="category">
+                            <option value="computer">컴퓨터 및 주변기기</option>
+                            <option value="camera">카메라</option>
+                            <option value="car">자동차 용품</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>제목</th>
+                    <td>
+                        <input type="text" id="title" name="title">
+                    </td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td>
+                        <textarea name="contents" id="contents" cols="30" rows="10"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input type="submit" value="저장">
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="memberId" th:value="${#authentication.name}">
+        </form>
+    </div>
+
+
+</body>
+
+</html>
